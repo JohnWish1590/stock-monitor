@@ -3,85 +3,92 @@ import json
 from datetime import datetime
 import traceback
 import re
-import os
 
 class PortfolioAnalyzer:
     def __init__(self, api_key):
-        # 1. 打印版本信息，确认库是否升级成功
-        import google.generativeai
-        print(f"📦 [系统检查] google-generativeai 版本: {google.generativeai.__version__}")
-        
         genai.configure(api_key=api_key)
+        
+        # 🎯 根据你的日志，精准打击！
+        # 优先级列表：只选 Flash 系列，避开 Pro (Pro 额度太低会报 429)
+        # Gemini 2.0 Flash 是目前最强且免费额度最好的模型
+        priority_models = [
+            'gemini-2.0-flash',          # 首选：性能强，额度高
+            'gemini-2.0-flash-lite-001', # 备选：极速，几乎不限流
+            'gemini-2.5-flash',          # 尝鲜：新版 Flash
+            'gemini-1.5-flash'           # 兜底
+        ]
+        
         self.model = None
         
-        # 2. 自动寻找可用模型
-        print("🔍 [系统检查] 正在扫描可用模型列表...")
+        print("🔍 [系统检查] 正在匹配最佳 Flash 模型...")
         try:
-            available_models = []
-            for m in genai.list_models():
-                if 'generateContent' in m.supported_generation_methods:
-                    available_models.append(m.name)
+            # 获取用户实际拥有的模型列表
+            available = [m.name.replace('models/', '') for m in genai.list_models()]
             
-            print(f"📋 [可用模型] 您的API支持: {available_models}")
-            
-            # 优先找 Flash，其次 Pro，最后随便找一个 Gemini
-            target_model = None
-            for m in available_models:
-                if 'flash' in m and '1.5' in m:
-                    target_model = m
+            # 匹配逻辑
+            for target in priority_models:
+                if target in available:
+                    print(f"✅ [模型锁定] 成功切换至: {target} (高额度/低延迟)")
+                    self.model = genai.GenerativeModel(target)
                     break
-            if not target_model:
-                for m in available_models:
-                    if 'pro' in m:
-                        target_model = m
-                        break
-            if not target_model and available_models:
-                target_model = available_models[0]
-                
-            if target_model:
-                print(f"✅ [模型选定] 自动切换至: {target_model}")
-                self.model = genai.GenerativeModel(target_model)
-            else:
-                print("❌ [严重错误] 未找到任何支持 generateContent 的模型！")
+            
+            # 如果都没匹配上（极小概率），强行试一下 2.0 Flash
+            if not self.model:
+                print("⚠️ 未在列表中匹配到预设模型，强行使用 gemini-2.0-flash")
+                self.model = genai.GenerativeModel('gemini-2.0-flash')
                 
         except Exception as e:
-            print(f"❌ [列表获取失败] 无法连接 Google API: {e}")
-            # 可能是 Key 权限问题或地区问题
-        
-    def analyze(self, data):
-        if not self.model:
-            return self._get_fallback_data("未找到可用模型 (权限或地区限制)")
+            print(f"❌ 模型列表获取失败，尝试盲连: {e}")
+            self.model = genai.GenerativeModel('gemini-2.0-flash')
 
-        print(f"🧠 [AI大脑] 正在通过 {self.model.model_name} 分析...")
+    def analyze(self, data):
+        print(f"🧠 [AI大脑] 正在通过 {self.model.model_name} 进行光速分析...")
         
         # 准备数据
         us_text = ", ".join([f"{s['name']}:{s.get('change_pct', 0)}%" for s in data.get('us_sectors', [])])
         
         all_stocks = data['portfolio']['hk_stocks'] + data['portfolio']['a_stocks']
         valid_stocks = [s for s in all_stocks if s.get('price', 0) > 0]
-        top_movers = sorted(valid_stocks, key=lambda x: abs(x.get('change_pct', 0)), reverse=True)[:10]
+        # 取前 12 个波动大的
+        top_movers = sorted(valid_stocks, key=lambda x: abs(x.get('change_pct', 0)), reverse=True)[:12]
         stock_text = "\n".join([f"- {s['name']}({s['code']}): {s.get('change_pct', 0)}%" for s in top_movers])
 
         prompt = f"""
-        请以JSON格式分析股市。不要Markdown。
+        请以标准JSON格式输出股市分析。禁止Markdown。
         时间：{datetime.now().strftime('%Y-%m-%d')}
+        
+        【市场数据】
         美股板块：{us_text}
         持仓异动：{stock_text}
-        
-        JSON结构：
+
+        【JSON结构要求】
         {{
-            "market_summary": "简评",
-            "sector_analysis": [],
-            "top_picks": [],
-            "risk_alerts": [],
-            "trading_strategy": "建议"
+            "market_summary": "简短定调",
+            "sector_analysis": [
+                {{
+                    "sector_name": "板块",
+                    "impact_level": "高/中/低",
+                    "reasoning": "原因",
+                    "affected_stocks": ["股票A"]
+                }}
+            ],
+            "top_picks": [
+                {{
+                    "stock_name": "股票名",
+                    "stock_code": "代码",
+                    "action": "关注",
+                    "reason": "简述"
+                }}
+            ]
         }}
         """
 
         try:
+            # 调用 API
             response = self.model.generate_content(prompt)
             text = response.text.strip()
-            # 强力清洗
+            
+            # 清洗
             match = re.search(r'\{.*\}', text, re.DOTALL)
             if match: text = match.group(0)
             
@@ -91,16 +98,17 @@ class PortfolioAnalyzer:
             return analysis_result
 
         except Exception as e:
-            print(f"❌ 分析过程出错: {e}")
-            return self._get_fallback_data(str(e))
-
-    def _get_fallback_data(self, error_msg):
-        return {
-            "market_summary": f"AI服务异常: {str(error_msg)[:50]}...",
-            "sector_analysis": [],
-            "top_picks": [],
-            "risk_alerts": ["请查看Actions日志中的模型列表"],
-            "trading_strategy": "暂停操作",
-            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "fallback": True
-        }
+            # 如果是 429 (限流)，打印特定提示
+            if "429" in str(e):
+                print("❌ 额度超限 (429)。请稍后再试，或检查 API 配额。")
+            else:
+                print(f"❌ 分析失败: {e}")
+            
+            return {
+                "market_summary": f"AI 连接受限: {str(e)[:50]}...",
+                "sector_analysis": [],
+                "top_picks": [],
+                "trading_strategy": "暂停操作",
+                "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "fallback": True
+            }
