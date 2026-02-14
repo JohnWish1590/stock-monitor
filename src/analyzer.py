@@ -1,111 +1,101 @@
-"""
-AI 分析模块：使用 Gemini API 进行跨市场联动分析和涨跌归因
-"""
-
 import google.generativeai as genai
 import json
 from datetime import datetime
+import traceback
 
 class PortfolioAnalyzer:
     def __init__(self, api_key):
         genai.configure(api_key=api_key)
+        # 🔥 核心修改：使用 Pro 模型，智商更高
         self.model = genai.GenerativeModel('gemini-1.5-pro')
         
-    def create_analysis_prompt(self, data):
-        """构建分析提示词"""
-        
-        sectors_text = "\n".join([
-            f"- {s['name']} ({s['symbol']}): {s['change_pct']:+.2f}%"
-            for s in data['us_sectors']
-        ])
-        
-        all_stocks = data['portfolio']['hk_stocks'] + data['portfolio']['a_stocks']
-        sorted_stocks = sorted(all_stocks, key=lambda x: abs(x.get('change_pct', 0)), reverse=True)[:8]
-        
-        stocks_text = "\n".join([
-            f"- {s['name']} ({s['code']}): {s.get('change_pct', 0):+.2f}% [{s['sector']}]"
-            for s in sorted_stocks
-        ])
-        
-        us_market = data['us_market']
-        
-        prompt = f"""你是一位专业的跨市场投资分析师。请基于以下数据生成今日盘前策略简报：
-
-【美股夜盘收盘数据】
-标普500: {us_market['sp500']['change_pct']:+.2f}%
-纳斯达克: {us_market['nasdaq']['change_pct']:+.2f}%
-
-板块表现：
-{sectors_text}
-
-【用户持仓重点关注】（按波动排序）
-{stocks_text}
-
-请生成结构化的JSON分析报告，包含以下字段：
-1. market_summary: 市场整体判断（1-2句话）
-2. sector_analysis: 板块分析数组，每个板块包含：
-   - sector_name: 板块名称
-   - performance: 表现描述
-   - impact_level: 影响程度（高/中/低）
-   - affected_stocks: 影响的具体股票列表（从用户持仓中匹配）
-   - reasoning: 逻辑说明
-3. top_picks: 今日重点关注股票数组（3-5只），包含：
-   - stock_name: 股票名称
-   - stock_code: 代码
-   - reason: 关注理由
-   - action: 建议操作（关注开盘/持有观察/逢低关注）
-4. risk_alerts: 风险提示数组
-5. trading_strategy: 整体交易策略建议（1-2句话）
-
-注意：
-- 重点关注美股板块与用户持仓的映射关系
-- 科技板块(XLK)影响小米、金蝶、比亚迪电子、恒玄科技等
-- 可选消费(XLY)影响美团、理想汽车、安踏、比亚迪、美的等  
-- 医疗(XLV)影响复星医药、再鼎医药、固生堂等
-- 分析要具体，不要泛泛而谈
-- 使用中文输出
-
-请直接返回JSON格式，不要包含markdown标记或其他说明文字。"""
-        return prompt
-    
     def analyze(self, data):
-        """执行AI分析"""
-        print("🤖 正在调用 Gemini AI 进行分析...")
+        print("🧠 [AI大脑] Gemini 1.5 Pro 正在进行深度归因...")
         
+        # 1. 构建 Prompt (注入灵魂)
+        # 将数据转为字符串供 AI 阅读
+        us_text = "\n".join([f"- {s['name']}({s['code']}): {s['change_pct']:+.2f}%" for s in data['us_sectors']])
+        
+        # 挑选波动大的股票展示，避免 token 溢出
+        all_stocks = data['portfolio']['hk_stocks'] + data['portfolio']['a_stocks']
+        # 按涨跌幅绝对值排序，取前 15 个重点分析
+        top_movers = sorted(all_stocks, key=lambda x: abs(x['change_pct']), reverse=True)[:15]
+        stock_text = "\n".join([f"- {s['name']}({s['code']}) [{s['sector']}]: {s['change_pct']:+.2f}% (现价: {s['price']})" for s in top_movers])
+
+        prompt = f"""
+        你是我（用户）的【首席基金经理】和【头号幕僚】。现在是北京时间 {datetime.now().strftime('%Y-%m-%d %H:%M')}。
+        
+        请阅读以下【真实行情数据】，为我撰写一份《全球映射与持仓监控日报》。
+
+        【宏观锚点：昨夜美股/板块】
+        {us_text}
+        (注：XLK=科技, SOXX=半导体, KWEB=中概/港股情绪)
+
+        【我的持仓表现 (重点关注)】
+        {stock_text}
+
+        【分析指令 - 必须严格执行】：
+        1. **人设**：你是专业的实战派基金经理。语言犀利、直接，拒绝“今日股市震荡”这种废话。
+        2. **核心逻辑（Mapping）**：
+           - 必须分析**美股映射**：比如“昨夜美股半导体(SOXX)跌了，导致今天你的A股恒玄科技跟着杀跌”。
+           - **汇率视角**：如果涉及出海股（如乐歌、巨星），必须结合汇率（人民币升值=利空）分析。
+        3. **输出格式**：必须是标准的 **JSON** 格式，不要Markdown代码块，不要废话。
+
+        【JSON 结构要求】：
+        {{
+            "market_summary": "一句话定调（例如：美股科技崩盘，A股被动杀跌，建议防守）",
+            "sector_analysis": [
+                {{
+                    "sector_name": "板块名（如：硬科技）",
+                    "impact_level": "高/中/低",
+                    "reasoning": "深度归因（结合美股和个股表现）",
+                    "affected_stocks": ["股票A", "股票B"]
+                }}
+            ],
+            "top_picks": [
+                {{
+                    "stock_name": "股票名",
+                    "stock_code": "代码",
+                    "action": "买入/卖出/持有/观望",
+                    "reason": "具体的战术建议（如：超跌反弹，博弈35元支撑）"
+                }}
+            ],
+            "risk_alerts": ["风险提示1", "风险提示2"],
+            "trading_strategy": "总结性的操作建议（100字以内）"
+        }}
+        """
+
         try:
-            prompt = self.create_analysis_prompt(data)
-            response = self.model.generate_content(prompt)
+            # 2. 调用 API
+            response = self.model.generate_content(
+                prompt,
+                generation_config={"response_mime_type": "application/json"}
+            )
             
-            response_text = response.text
+            # 3. 解析结果
+            # 1.5 Pro 通常会很听话地返回 JSON，直接解析
+            text = response.text.strip()
+            # 去掉可能存在的 markdown 符号
+            if text.startswith("```json"):
+                text = text[7:-3]
             
-            if "```json" in response_text:
-                response_text = response_text.split("```json")[1].split("```")[0]
-            elif "```" in response_text:
-                response_text = response_text.split("```")[1].split("```")[0]
+            analysis_result = json.loads(text)
             
-            analysis_result = json.loads(response_text.strip())
-            
+            # 补充时间戳
             analysis_result['generated_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            analysis_result['data_timestamp'] = data['collected_at']
-            
-            print("✅ AI 分析完成")
+            print("✅ AI 分析成功！")
             return analysis_result
-            
+
         except Exception as e:
-            print(f"⚠️ AI 分析失败: {e}")
-            import traceback
+            print(f"❌ AI 分析失败: {e}")
             traceback.print_exc()
-            return self._fallback_analysis(data)
-    
-    def _fallback_analysis(self, data):
-        """备用分析"""
-        return {
-            "market_summary": "美股隔夜表现平稳，建议关注板块轮动机会",
-            "sector_analysis": [],
-            "top_picks": [],
-            "risk_alerts": ["AI分析服务暂时不可用，请手动判断"],
-            "trading_strategy": "建议观望，等待开盘后的市场方向明确",
-            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "data_timestamp": data['collected_at'],
-            "fallback": True
-        }
+            # 返回一个“假”的分析结果，防止网页报错，但内容会提示错误
+            return {
+                "market_summary": f"⚠️ AI 大脑暂时掉线: {str(e)}",
+                "sector_analysis": [],
+                "top_picks": [],
+                "risk_alerts": ["API 调用失败，请检查 Key 或 网络"],
+                "trading_strategy": "暂停操作",
+                "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "fallback": True
+            }
