@@ -3,42 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自选股监控 | 02/14</title>
+    <title>自选股监控</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #f5f7fa; color: #333; margin:0; padding:20px; }
+        body { font-family: -apple-system, sans-serif; background: #f5f7fa; color: #333; margin:0; padding:15px; }
         .container { max-width: 1200px; margin: 0 auto; }
-        .header { background: #2c3e50; color: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .header { background: #2c3e50; color: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         @media(max-width: 768px) { .grid { grid-template-columns: 1fr; } }
         
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .card-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .card-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
         
-        .sector-card { padding: 10px; margin-bottom: 10px; border-radius: 8px; }
-        .sector-header { display: flex; justify-content: space-between; }
-        .sector-change { font-size: 18px; font-weight: bold; margin: 5px 0; }
+        .sector-card { padding: 8px; margin-bottom: 8px; border-radius: 4px; display:flex; justify-content:space-between; align-items:center; }
+        .analysis-card { background: #f8f9fa; padding: 10px; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #3498db; }
         
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; color: #888; font-size: 12px; padding: 10px; }
-        td { padding: 10px; border-bottom: 1px solid #eee; }
-        
-        .analysis-card, .pick-card { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #3498db; }
-        .impact-badge { background: #e74c3c; color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; float: right; }
-        .us-sector-tag { background: #eef2f7; color: #555; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
-        .footer { text-align: center; color: #999; font-size: 12px; margin-top: 30px; }
+        th { text-align: left; color: #999; font-size: 12px; padding: 8px; border-bottom:1px solid #eee; }
+        td { padding: 8px; border-bottom: 1px solid #f9f9f9; vertical-align: middle; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚀 基金经理驾驶舱</h1>
-            <p>数据更新: 2026-02-14 14:42:59 | 港股: 15 | A股: 35</p>
+            <h2 style="margin:0;">🚀 基金经理驾驶舱</h2>
+            <div style="font-size:12px; opacity:0.8; margin-top:5px;">更新时间: 2026-02-14 14:57:48 (北京时间)</div>
         </div>
 
         <div class="card">
-            <div class="card-title">🤖 智能投研日报</div>
-            <div style="background:#e8f4fd; padding:15px; border-radius:8px; margin-bottom:15px;">
-                <strong>核心观点：</strong> AI 连接受限: 429 You exceeded your current quota, please check ...
+            <div class="card-title">🤖 AI 投研内参</div>
+            <div style="background:#e3f2fd; padding:10px; border-radius:4px; margin-bottom:10px; font-size:14px; color:#0d47a1;">
+                AI 连接受限: 429 You exceeded your current quota, please check ...
             </div>
             
         </div>
@@ -46,614 +40,737 @@
         <div class="grid">
             <div>
                 <div class="card">
-                    <div class="card-title">🌎 美股/板块映射</div>
+                    <div class="card-title">🌎 美股板块映射</div>
                     
                 <div class="sector-card" style="background:#fff; border-left:4px solid #d32f2f">
                     <div class="sector-header">
                         <span class="sector-name">医疗(映射医药)</span>
-                        <span class="sector-symbol">XLV</span> 
                     </div>
                     <div class="sector-change" style="color:#d32f2f">
-                        📈 +1.07%
-                    </div>
-                    <div class="sector-detail">
-                        价格: $157.67
+                        +1.07%
                     </div>
                 </div>
                 
                 <div class="sector-card" style="background:#fff; border-left:4px solid #d32f2f">
                     <div class="sector-header">
                         <span class="sector-name">半导体(映射A股芯片)</span>
-                        <span class="sector-symbol">SOXX</span> 
                     </div>
                     <div class="sector-change" style="color:#d32f2f">
-                        📈 +0.90%
-                    </div>
-                    <div class="sector-detail">
-                        价格: $354.66
+                        +0.90%
                     </div>
                 </div>
                 
                 <div class="sector-card" style="background:#fff; border-left:4px solid #d32f2f">
                     <div class="sector-header">
                         <span class="sector-name">科技(映射小米/芯片)</span>
-                        <span class="sector-symbol">XLK</span> 
                     </div>
                     <div class="sector-change" style="color:#d32f2f">
-                        📈 +0.25%
-                    </div>
-                    <div class="sector-detail">
-                        价格: $139.56
+                        +0.25%
                     </div>
                 </div>
                 
                 <div class="sector-card" style="background:#fff; border-left:4px solid #d32f2f">
                     <div class="sector-header">
                         <span class="sector-name">可选消费(映射汽车/家电)</span>
-                        <span class="sector-symbol">XLY</span> 
                     </div>
                     <div class="sector-change" style="color:#d32f2f">
-                        📈 +0.04%
-                    </div>
-                    <div class="sector-detail">
-                        价格: $116.18
+                        +0.04%
                     </div>
                 </div>
                 
                 <div class="sector-card" style="background:#fff; border-left:4px solid #666">
                     <div class="sector-header">
                         <span class="sector-name">中概股互联(港股风向)</span>
-                        <span class="sector-symbol">KWEB</span> 
                     </div>
                     <div class="sector-change" style="color:#666">
-                        📉 +0.00%
-                    </div>
-                    <div class="sector-detail">
-                        价格: $32.79
+                        +0.00%
                     </div>
                 </div>
                 
                 <div class="sector-card" style="background:#fff; border-left:4px solid #388e3c">
                     <div class="sector-header">
                         <span class="sector-name">通讯(映射互联网)</span>
-                        <span class="sector-symbol">XLC</span> 
                     </div>
                     <div class="sector-change" style="color:#388e3c">
-                        📉 -0.05%
-                    </div>
-                    <div class="sector-detail">
-                        价格: $114.58
+                        -0.05%
                     </div>
                 </div>
                 
                 </div>
+                
                 <div class="card">
-                    <div class="card-title">🎯 重点关注机会</div>
+                    <div class="card-title">🎯 重点关注</div>
                     
                 </div>
             </div>
             
             <div>
                 <div class="card">
-                    <div class="card-title">HK 港股持仓 (15)</div>
+                    <div class="card-title">🇭🇰 港股持仓</div>
                     <table>
-                        <thead><tr><th>代码</th><th>行业</th><th>涨跌</th><th>价格</th><th>映射</th></tr></thead>
+                        <thead><tr><th>代码/映射</th><th>行业</th><th>涨跌</th><th>价格</th></tr></thead>
                         <tbody>
                 <tr>
-                    <td><strong>再鼎医药</strong><br><small>9688.HK</small></td>
-                    <td>创新药</td>
+                    <td>
+                        <div style="font-weight:bold;">再鼎医药</div>
+                        <div style="font-size:11px; color:#666;">9688.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Health Care</div>
+                    </td>
+                    <td style="font-size:13px;">创新药</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +7.37%
                     </td>
                     <td>15.59</td>
-                    <td><span class="us-sector-tag">Health Care</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>微创医疗</strong><br><small>0853.HK</small></td>
-                    <td>医疗器械</td>
+                    <td>
+                        <div style="font-weight:bold;">微创医疗</div>
+                        <div style="font-size:11px; color:#666;">0853.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Health Care</div>
+                    </td>
+                    <td style="font-size:13px;">医疗器械</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +4.44%
                     </td>
                     <td>11.29</td>
-                    <td><span class="us-sector-tag">Health Care</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>速腾聚创</strong><br><small>2498.HK</small></td>
-                    <td>激光雷达/汽车电子</td>
+                    <td>
+                        <div style="font-weight:bold;">速腾聚创</div>
+                        <div style="font-size:11px; color:#666;">2498.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">激光雷达/汽车电子</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +3.62%
                     </td>
                     <td>34.90</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>固生堂</strong><br><small>2273.HK</small></td>
-                    <td>医疗服务</td>
+                    <td>
+                        <div style="font-weight:bold;">固生堂</div>
+                        <div style="font-size:11px; color:#666;">2273.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Health Care</div>
+                    </td>
+                    <td style="font-size:13px;">医疗服务</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +1.03%
                     </td>
                     <td>31.24</td>
-                    <td><span class="us-sector-tag">Health Care</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>安踏体育</strong><br><small>2020.HK</small></td>
-                    <td>体育用品</td>
+                    <td>
+                        <div style="font-weight:bold;">安踏体育</div>
+                        <div style="font-size:11px; color:#666;">2020.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">体育用品</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +0.90%
                     </td>
                     <td>84.25</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>小米集团</strong><br><small>1810.HK</small></td>
-                    <td>科技/消费电子</td>
+                    <td>
+                        <div style="font-weight:bold;">小米集团</div>
+                        <div style="font-size:11px; color:#666;">1810.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">科技/消费电子</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +0.88%
                     </td>
                     <td>36.84</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>比亚迪电子</strong><br><small>0285.HK</small></td>
-                    <td>电子制造</td>
+                    <td>
+                        <div style="font-weight:bold;">比亚迪电子</div>
+                        <div style="font-size:11px; color:#666;">0285.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">电子制造</td>
                     <td style="font-weight:bold; color:#666;">
                         +0.00%
                     </td>
                     <td>32.78</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>中国中药</strong><br><small>0570.HK</small></td>
-                    <td>中药</td>
+                    <td>
+                        <div style="font-weight:bold;">中国中药</div>
+                        <div style="font-size:11px; color:#666;">0570.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Health Care</div>
+                    </td>
+                    <td style="font-size:13px;">中药</td>
                     <td style="font-weight:bold; color:#666;">
                         +0.00%
                     </td>
                     <td>2.04</td>
-                    <td><span class="us-sector-tag">Health Care</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>金蝶国际</strong><br><small>0268.HK</small></td>
-                    <td>软件/SaaS</td>
+                    <td>
+                        <div style="font-weight:bold;">金蝶国际</div>
+                        <div style="font-size:11px; color:#666;">0268.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">软件/SaaS</td>
                     <td style="font-weight:bold; color:#666;">
                         +0.00%
                     </td>
                     <td>11.07</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>JS环球生活</strong><br><small>1691.HK</small></td>
-                    <td>小家电</td>
+                    <td>
+                        <div style="font-weight:bold;">JS环球生活</div>
+                        <div style="font-size:11px; color:#666;">1691.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">小家电</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.55%
                     </td>
                     <td>1.82</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>复星医药</strong><br><small>2196.HK</small></td>
-                    <td>医药</td>
+                    <td>
+                        <div style="font-weight:bold;">复星医药</div>
+                        <div style="font-size:11px; color:#666;">2196.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Health Care</div>
+                    </td>
+                    <td style="font-size:13px;">医药</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.45%
                     </td>
                     <td>20.46</td>
-                    <td><span class="us-sector-tag">Health Care</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>枫叶教育</strong><br><small>1317.HK</small></td>
-                    <td>教育</td>
+                    <td>
+                        <div style="font-weight:bold;">枫叶教育</div>
+                        <div style="font-size:11px; color:#666;">1317.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">教育</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.47%
                     </td>
                     <td>0.34</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>理想汽车</strong><br><small>2015.HK</small></td>
-                    <td>新能源汽车</td>
+                    <td>
+                        <div style="font-weight:bold;">理想汽车</div>
+                        <div style="font-size:11px; color:#666;">2015.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">新能源汽车</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -2.23%
                     </td>
                     <td>72.30</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>美团</strong><br><small>3690.HK</small></td>
-                    <td>互联网/本地生活</td>
+                    <td>
+                        <div style="font-weight:bold;">美团</div>
+                        <div style="font-size:11px; color:#666;">3690.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">互联网/本地生活</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -3.18%
                     </td>
                     <td>82.15</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>心动公司</strong><br><small>2400.HK</small></td>
-                    <td>游戏</td>
+                    <td>
+                        <div style="font-weight:bold;">心动公司</div>
+                        <div style="font-size:11px; color:#666;">2400.HK</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Communication Services</div>
+                    </td>
+                    <td style="font-size:13px;">游戏</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -3.64%
                     </td>
                     <td>78.05</td>
-                    <td><span class="us-sector-tag">Communication Services</span></td>
                 </tr>
                 </tbody>
                     </table>
                 </div>
                 
                 <div class="card">
-                    <div class="card-title">CN A股持仓 (35)</div>
+                    <div class="card-title">🇨🇳 A股持仓</div>
                     <table>
-                        <thead><tr><th>代码</th><th>行业</th><th>涨跌</th><th>价格</th><th>映射</th></tr></thead>
+                        <thead><tr><th>代码/映射</th><th>行业</th><th>涨跌</th><th>价格</th></tr></thead>
                         <tbody>
                 <tr>
-                    <td><strong>航发控制</strong><br><small>000738.SZ</small></td>
-                    <td>航空发动机</td>
+                    <td>
+                        <div style="font-weight:bold;">航发控制</div>
+                        <div style="font-size:11px; color:#666;">000738.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Industrials</div>
+                    </td>
+                    <td style="font-size:13px;">航空发动机</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +7.44%
                     </td>
                     <td>29.45</td>
-                    <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>恩捷股份</strong><br><small>002812.SZ</small></td>
-                    <td>锂电池隔膜</td>
+                    <td>
+                        <div style="font-weight:bold;">恩捷股份</div>
+                        <div style="font-size:11px; color:#666;">002812.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Materials</div>
+                    </td>
+                    <td style="font-size:13px;">锂电池隔膜</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +4.88%
                     </td>
                     <td>64.50</td>
-                    <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>博云新材</strong><br><small>002297.SZ</small></td>
-                    <td>航空材料</td>
+                    <td>
+                        <div style="font-weight:bold;">博云新材</div>
+                        <div style="font-size:11px; color:#666;">002297.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Materials</div>
+                    </td>
+                    <td style="font-size:13px;">航空材料</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +4.44%
                     </td>
                     <td>13.16</td>
-                    <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>晶合集成</strong><br><small>688249.SS</small></td>
-                    <td>半导体制造</td>
+                    <td>
+                        <div style="font-weight:bold;">晶合集成</div>
+                        <div style="font-size:11px; color:#666;">688249.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">半导体制造</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +2.83%
                     </td>
                     <td>37.48</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>影石创新</strong><br><small>688775.SS</small></td>
-                    <td>智能影像</td>
+                    <td>
+                        <div style="font-weight:bold;">影石创新</div>
+                        <div style="font-size:11px; color:#666;">688775.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">智能影像</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +1.36%
                     </td>
                     <td>224.70</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>立讯精密</strong><br><small>002475.SZ</small></td>
-                    <td>电子制造</td>
+                    <td>
+                        <div style="font-weight:bold;">立讯精密</div>
+                        <div style="font-size:11px; color:#666;">002475.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">电子制造</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +0.73%
                     </td>
                     <td>50.80</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>圣邦股份</strong><br><small>300661.SZ</small></td>
-                    <td>半导体/模拟芯片</td>
+                    <td>
+                        <div style="font-weight:bold;">圣邦股份</div>
+                        <div style="font-size:11px; color:#666;">300661.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">半导体/模拟芯片</td>
                     <td style="font-weight:bold; color:#d32f2f;">
                         +0.47%
                     </td>
                     <td>70.41</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>七一二</strong><br><small>603712.SS</small></td>
-                    <td>军工通信</td>
+                    <td>
+                        <div style="font-weight:bold;">七一二</div>
+                        <div style="font-size:11px; color:#666;">603712.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Industrials</div>
+                    </td>
+                    <td style="font-size:13px;">军工通信</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.05%
                     </td>
                     <td>19.44</td>
-                    <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>罗莱生活</strong><br><small>002293.SZ</small></td>
-                    <td>家纺</td>
+                    <td>
+                        <div style="font-weight:bold;">罗莱生活</div>
+                        <div style="font-size:11px; color:#666;">002293.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">家纺</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.38%
                     </td>
                     <td>10.36</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>之江生物</strong><br><small>688317.SS</small></td>
-                    <td>医疗器械</td>
+                    <td>
+                        <div style="font-weight:bold;">之江生物</div>
+                        <div style="font-size:11px; color:#666;">688317.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Health Care</div>
+                    </td>
+                    <td style="font-size:13px;">医疗器械</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.52%
                     </td>
                     <td>20.93</td>
-                    <td><span class="us-sector-tag">Health Care</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>盈峰环境</strong><br><small>000967.SZ</small></td>
-                    <td>环保</td>
+                    <td>
+                        <div style="font-weight:bold;">盈峰环境</div>
+                        <div style="font-size:11px; color:#666;">000967.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Industrials</div>
+                    </td>
+                    <td style="font-size:13px;">环保</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.66%
                     </td>
                     <td>7.48</td>
-                    <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>招商银行</strong><br><small>600036.SS</small></td>
-                    <td>银行</td>
+                    <td>
+                        <div style="font-weight:bold;">招商银行</div>
+                        <div style="font-size:11px; color:#666;">600036.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Financials</div>
+                    </td>
+                    <td style="font-size:13px;">银行</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.72%
                     </td>
                     <td>38.71</td>
-                    <td><span class="us-sector-tag">Financials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>海尔智家</strong><br><small>600690.SS</small></td>
-                    <td>家电</td>
+                    <td>
+                        <div style="font-weight:bold;">海尔智家</div>
+                        <div style="font-size:11px; color:#666;">600690.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">家电</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.73%
                     </td>
                     <td>25.70</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>上海机场</strong><br><small>600009.SS</small></td>
-                    <td>航空运输</td>
+                    <td>
+                        <div style="font-weight:bold;">上海机场</div>
+                        <div style="font-size:11px; color:#666;">600009.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Industrials</div>
+                    </td>
+                    <td style="font-size:13px;">航空运输</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.87%
                     </td>
                     <td>30.75</td>
-                    <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>美的集团</strong><br><small>000333.SZ</small></td>
-                    <td>家电</td>
+                    <td>
+                        <div style="font-weight:bold;">美的集团</div>
+                        <div style="font-size:11px; color:#666;">000333.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">家电</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.94%
                     </td>
                     <td>79.05</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>比亚迪</strong><br><small>002594.SZ</small></td>
-                    <td>新能源汽车</td>
+                    <td>
+                        <div style="font-weight:bold;">比亚迪</div>
+                        <div style="font-size:11px; color:#666;">002594.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">新能源汽车</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.98%
                     </td>
                     <td>90.27</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>乐歌股份</strong><br><small>300729.SZ</small></td>
-                    <td>智能家居</td>
+                    <td>
+                        <div style="font-weight:bold;">乐歌股份</div>
+                        <div style="font-size:11px; color:#666;">300729.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">智能家居</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.99%
                     </td>
                     <td>13.94</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>圣农发展</strong><br><small>002299.SZ</small></td>
-                    <td>养殖</td>
+                    <td>
+                        <div style="font-weight:bold;">圣农发展</div>
+                        <div style="font-size:11px; color:#666;">002299.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Staples</div>
+                    </td>
+                    <td style="font-size:13px;">养殖</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -0.99%
                     </td>
                     <td>18.01</td>
-                    <td><span class="us-sector-tag">Consumer Staples</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>华域汽车</strong><br><small>600741.SS</small></td>
-                    <td>汽车零部件</td>
+                    <td>
+                        <div style="font-weight:bold;">华域汽车</div>
+                        <div style="font-size:11px; color:#666;">600741.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">汽车零部件</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.09%
                     </td>
                     <td>19.05</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>三全食品</strong><br><small>002216.SZ</small></td>
-                    <td>食品</td>
+                    <td>
+                        <div style="font-weight:bold;">三全食品</div>
+                        <div style="font-size:11px; color:#666;">002216.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Staples</div>
+                    </td>
+                    <td style="font-size:13px;">食品</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.12%
                     </td>
                     <td>11.46</td>
-                    <td><span class="us-sector-tag">Consumer Staples</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>京东方A</strong><br><small>000725.SZ</small></td>
-                    <td>面板/半导体显示</td>
+                    <td>
+                        <div style="font-weight:bold;">京东方A</div>
+                        <div style="font-size:11px; color:#666;">000725.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">面板/半导体显示</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.18%
                     </td>
                     <td>4.18</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>东方财富</strong><br><small>300059.SZ</small></td>
-                    <td>互联网金融</td>
+                    <td>
+                        <div style="font-weight:bold;">东方财富</div>
+                        <div style="font-size:11px; color:#666;">300059.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Financials</div>
+                    </td>
+                    <td style="font-size:13px;">互联网金融</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.28%
                     </td>
                     <td>22.37</td>
-                    <td><span class="us-sector-tag">Financials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>恒玄科技</strong><br><small>688608.SS</small></td>
-                    <td>半导体/AI芯片</td>
+                    <td>
+                        <div style="font-weight:bold;">恒玄科技</div>
+                        <div style="font-size:11px; color:#666;">688608.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">半导体/AI芯片</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.41%
                     </td>
                     <td>209.01</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>羚锐制药</strong><br><small>600285.SS</small></td>
-                    <td>中药</td>
+                    <td>
+                        <div style="font-weight:bold;">羚锐制药</div>
+                        <div style="font-size:11px; color:#666;">600285.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Health Care</div>
+                    </td>
+                    <td style="font-size:13px;">中药</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.47%
                     </td>
                     <td>21.47</td>
-                    <td><span class="us-sector-tag">Health Care</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>富瀚微</strong><br><small>300613.SZ</small></td>
-                    <td>半导体/视频芯片</td>
+                    <td>
+                        <div style="font-weight:bold;">富瀚微</div>
+                        <div style="font-size:11px; color:#666;">300613.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">半导体/视频芯片</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.78%
                     </td>
                     <td>47.01</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>中国平安</strong><br><small>601318.SS</small></td>
-                    <td>保险</td>
+                    <td>
+                        <div style="font-weight:bold;">中国平安</div>
+                        <div style="font-size:11px; color:#666;">601318.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Financials</div>
+                    </td>
+                    <td style="font-size:13px;">保险</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.88%
                     </td>
                     <td>65.29</td>
-                    <td><span class="us-sector-tag">Financials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>绿发电力</strong><br><small>000537.SZ</small></td>
-                    <td>电力</td>
+                    <td>
+                        <div style="font-weight:bold;">绿发电力</div>
+                        <div style="font-size:11px; color:#666;">000537.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Utilities</div>
+                    </td>
+                    <td style="font-size:13px;">电力</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -1.94%
                     </td>
                     <td>8.60</td>
-                    <td><span class="us-sector-tag">Utilities</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>安克创新</strong><br><small>300866.SZ</small></td>
-                    <td>消费电子</td>
+                    <td>
+                        <div style="font-weight:bold;">安克创新</div>
+                        <div style="font-size:11px; color:#666;">300866.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Consumer Discretionary</div>
+                    </td>
+                    <td style="font-size:13px;">消费电子</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -2.03%
                     </td>
                     <td>98.69</td>
-                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>中国中铁</strong><br><small>601390.SS</small></td>
-                    <td>基建</td>
+                    <td>
+                        <div style="font-weight:bold;">中国中铁</div>
+                        <div style="font-size:11px; color:#666;">601390.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Industrials</div>
+                    </td>
+                    <td style="font-size:13px;">基建</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -2.31%
                     </td>
                     <td>5.50</td>
-                    <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>云天化</strong><br><small>600096.SS</small></td>
-                    <td>化工</td>
+                    <td>
+                        <div style="font-weight:bold;">云天化</div>
+                        <div style="font-size:11px; color:#666;">600096.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Materials</div>
+                    </td>
+                    <td style="font-size:13px;">化工</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -2.40%
                     </td>
                     <td>35.78</td>
-                    <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>巨星科技</strong><br><small>002444.SZ</small></td>
-                    <td>工具制造</td>
+                    <td>
+                        <div style="font-weight:bold;">巨星科技</div>
+                        <div style="font-size:11px; color:#666;">002444.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Industrials</div>
+                    </td>
+                    <td style="font-size:13px;">工具制造</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -2.41%
                     </td>
                     <td>36.05</td>
-                    <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>湖北宜化</strong><br><small>000422.SZ</small></td>
-                    <td>化工</td>
+                    <td>
+                        <div style="font-weight:bold;">湖北宜化</div>
+                        <div style="font-size:11px; color:#666;">000422.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Materials</div>
+                    </td>
+                    <td style="font-size:13px;">化工</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -2.78%
                     </td>
                     <td>15.41</td>
-                    <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>安迪苏</strong><br><small>600299.SS</small></td>
-                    <td>动物营养</td>
+                    <td>
+                        <div style="font-weight:bold;">安迪苏</div>
+                        <div style="font-size:11px; color:#666;">600299.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Materials</div>
+                    </td>
+                    <td style="font-size:13px;">动物营养</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -3.63%
                     </td>
                     <td>10.10</td>
-                    <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>广立微</strong><br><small>301095.SZ</small></td>
-                    <td>半导体/EDA</td>
+                    <td>
+                        <div style="font-weight:bold;">广立微</div>
+                        <div style="font-size:11px; color:#666;">301095.SZ</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Technology</div>
+                    </td>
+                    <td style="font-size:13px;">半导体/EDA</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -3.92%
                     </td>
                     <td>89.22</td>
-                    <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
                 <tr>
-                    <td><strong>中国石油</strong><br><small>601857.SS</small></td>
-                    <td>石油石化</td>
+                    <td>
+                        <div style="font-weight:bold;">中国石油</div>
+                        <div style="font-size:11px; color:#666;">601857.SS</div>
+                        <div style="font-size:10px; color:#999; margin-top:2px; background:#f5f5f5; display:inline-block; padding:1px 4px; border-radius:3px;">🇺🇸 Energy</div>
+                    </td>
+                    <td style="font-size:13px;">石油石化</td>
                     <td style="font-weight:bold; color:#388e3c;">
                         -4.53%
                     </td>
                     <td>10.54</td>
-                    <td><span class="us-sector-tag">Energy</span></td>
                 </tr>
                 </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-        
-        <div class="footer">
-            Generated by GitHub Actions & Gemini 1.5 Flash
         </div>
     </div>
 </body>
