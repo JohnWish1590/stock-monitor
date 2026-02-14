@@ -466,17 +466,17 @@
         }
       ]
     },
-    "collected_at": "2026-02-14 14:32:51"
+    "collected_at": "2026-02-14 14:38:08"
   },
   "analysis": {
-    "market_summary": "AI 连接受限 (Gemini Pro): 404 models/gemini-pro is not found for API version",
+    "market_summary": "AI服务异常: 429 You exceeded your current quota, please check ...",
     "sector_analysis": [],
     "top_picks": [],
     "risk_alerts": [
-      "请检查网络或Key配额"
+      "请查看Actions日志中的模型列表"
     ],
     "trading_strategy": "暂停操作",
-    "generated_at": "2026-02-14 14:32:51",
+    "generated_at": "2026-02-14 14:38:08",
     "fallback": true
   }
 }
