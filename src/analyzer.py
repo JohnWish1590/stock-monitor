@@ -9,7 +9,7 @@ from datetime import datetime
 class PortfolioAnalyzer:
     def __init__(self, api_key):
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        self.model = genai.GenerativeModel('gemini-1.5-pro')
         
     def create_analysis_prompt(self, data):
         """构建分析提示词"""
@@ -93,6 +93,8 @@ class PortfolioAnalyzer:
             
         except Exception as e:
             print(f"⚠️ AI 分析失败: {e}")
+            import traceback
+            traceback.print_exc()
             return self._fallback_analysis(data)
     
     def _fallback_analysis(self, data):
