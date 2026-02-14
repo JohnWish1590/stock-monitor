@@ -3,745 +3,647 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自选股监控面板 | 02/14</title>
+    <title>自选股监控 | 02/14</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
-            background: #f0f2f5; 
-            color: #333;
-            line-height: 1.6;
-        }
-        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        body { font-family: -apple-system, sans-serif; background: #f5f7fa; color: #333; margin:0; padding:20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: #2c3e50; color: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media(max-width: 768px) { .grid { grid-template-columns: 1fr; } }
         
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        .header h1 { font-size: 28px; margin-bottom: 8px; }
-        .header-meta { opacity: 0.9; font-size: 14px; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         
-        .market-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        .market-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-        .market-label { font-size: 12px; color: #666; margin-bottom: 4px; }
-        .market-value { font-size: 24px; font-weight: bold; }
+        .sector-card { padding: 10px; margin-bottom: 10px; border-radius: 8px; }
+        .sector-header { display: flex; justify-content: space-between; }
+        .sector-change { font-size: 18px; font-weight: bold; margin: 5px 0; }
         
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 24px;
-        }
-        @media (max-width: 968px) { .main-grid { grid-template-columns: 1fr; } }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; color: #888; font-size: 12px; padding: 10px; }
+        td { padding: 10px; border-bottom: 1px solid #eee; }
         
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .sector-card {
-            padding: 16px;
-            margin-bottom: 12px;
-            border-radius: 12px;
-            border-left: 4px solid;
-            transition: transform 0.2s;
-        }
-        .sector-card:hover { transform: translateX(4px); }
-        .sector-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .sector-name { font-weight: 600; font-size: 16px; }
-        .sector-symbol { color: #999; font-size: 12px; }
-        .sector-change { font-size: 20px; font-weight: bold; margin: 4px 0; }
-        .sector-detail { font-size: 12px; color: #666; }
-        
-        .stock-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-        .stock-table th {
-            text-align: left;
-            padding: 12px;
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #666;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-        .stock-table td {
-            padding: 12px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .stock-table tr:hover { opacity: 0.8; }
-        .us-sector-tag {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-        }
-        
-        .analysis-card {
-            background: #f8f9fa;
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border-left: 4px solid #667eea;
-        }
-        .analysis-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .analysis-sector { font-weight: 600; }
-        .impact-badge {
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-        }
-        .analysis-reason { font-size: 13px; color: #555; margin-bottom: 8px; }
-        .affected-stocks { font-size: 12px; color: #888; }
-        
-        .pick-card {
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border: 2px solid;
-        }
-        .pick-card.action-watch { background: #fff3e0; border-color: #ff9800; }
-        .pick-card.action-hold { background: #e3f2fd; border-color: #2196f3; }
-        .pick-card.action-buy { background: #e8f5e9; border-color: #4caf50; }
-        
-        .pick-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-        .pick-name { font-weight: 600; font-size: 16px; }
-        .pick-code { color: #666; font-size: 13px; }
-        .pick-action {
-            margin-left: auto;
-            background: rgba(0,0,0,0.1);
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        .pick-reason { font-size: 13px; color: #555; line-height: 1.5; }
-        
-        .footer {
-            text-align: center;
-            padding: 24px;
-            color: #999;
-            font-size: 12px;
-        }
-        
-        .update-time {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            z-index: 100;
-        }
+        .analysis-card, .pick-card { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #3498db; }
+        .impact-badge { background: #e74c3c; color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; float: right; }
+        .us-sector-tag { background: #eef2f7; color: #555; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+        .footer { text-align: center; color: #999; font-size: 12px; margin-top: 30px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 自选股全景监控</h1>
-            <div class="header-meta">
-                美股板块联动分析 | 港股: 0只 | A股: 35只 | 
-                数据更新: 2026-02-14 13:59:40
-            </div>
+            <h1>🚀 基金经理驾驶舱</h1>
+            <p>数据更新: 2026-02-14 14:12:33 | 港股: 15 | A股: 35</p>
         </div>
-        
-        <div class="market-overview">
-            <div class="market-card">
-                <div class="market-label">标普500</div>
-                <div class="market-value" style="color:#d32f2f">
-                    +0.05%
-                </div>
+
+        <div class="card">
+            <div class="card-title">🤖 智能投研日报</div>
+            <div style="background:#e8f4fd; padding:15px; border-radius:8px; margin-bottom:15px;">
+                <strong>核心观点：</strong> ⚠️ AI 服务暂时不可用: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
             </div>
-            <div class="market-card">
-                <div class="market-label">纳斯达克</div>
-                <div class="market-value" style="color:#388e3c">
-                    -0.22%
-                </div>
-            </div>
-            <div class="market-card">
-                <div class="market-label">AI分析状态</div>
-                <div class="market-value" style="color:#667eea; font-size:18px;">
-                    ✅ 已生成
-                </div>
-            </div>
+            
         </div>
-        
-        <div class="main-grid">
-            <div class="left-col">
+
+        <div class="grid">
+            <div>
                 <div class="card">
-                    <div class="card-title">🌐 美股板块表现（夜盘收盘）</div>
+                    <div class="card-title">🌎 美股/板块映射</div>
                     
-            <div class="sector-card" style="background:#ffebee; border-left-color:#d32f2f">
-                <div class="sector-header">
-                    <span class="sector-name">Utilities</span>
-                    <span class="sector-symbol">XLU</span>
-                </div>
-                <div class="sector-change" style="color:#d32f2f">
-                    🔥 +2.76%
-                </div>
-                <div class="sector-detail">
-                    价格: $46.5 | 涨跌: $+1.25
-                </div>
-            </div>
-            
-            <div class="sector-card" style="background:#fff8e1; border-left-color:#d32f2f">
-                <div class="sector-header">
-                    <span class="sector-name">Health Care</span>
-                    <span class="sector-symbol">XLV</span>
-                </div>
-                <div class="sector-change" style="color:#d32f2f">
-                    📈 +1.07%
-                </div>
-                <div class="sector-detail">
-                    价格: $157.67 | 涨跌: $+1.67
-                </div>
-            </div>
-            
-            <div class="sector-card" style="background:#fff8e1; border-left-color:#d32f2f">
-                <div class="sector-header">
-                    <span class="sector-name">Materials</span>
-                    <span class="sector-symbol">XLB</span>
-                </div>
-                <div class="sector-change" style="color:#d32f2f">
-                    📈 +0.91%
-                </div>
-                <div class="sector-detail">
-                    价格: $53.31 | 涨跌: $+0.48
-                </div>
-            </div>
-            
-            <div class="sector-card" style="background:#fff8e1; border-left-color:#d32f2f">
-                <div class="sector-header">
-                    <span class="sector-name">Industrials</span>
-                    <span class="sector-symbol">XLI</span>
-                </div>
-                <div class="sector-change" style="color:#d32f2f">
-                    📈 +0.82%
-                </div>
-                <div class="sector-detail">
-                    价格: $174.17 | 涨跌: $+1.42
-                </div>
-            </div>
-            
-            <div class="sector-card" style="background:#fff8e1; border-left-color:#d32f2f">
-                <div class="sector-header">
-                    <span class="sector-name">Energy</span>
-                    <span class="sector-symbol">XLE</span>
-                </div>
-                <div class="sector-change" style="color:#d32f2f">
-                    📈 +0.69%
-                </div>
-                <div class="sector-detail">
-                    价格: $54.35 | 涨跌: $+0.37
-                </div>
-            </div>
-            
-            <div class="sector-card" style="background:#fff8e1; border-left-color:#d32f2f">
-                <div class="sector-header">
-                    <span class="sector-name">Consumer Staples</span>
-                    <span class="sector-symbol">XLP</span>
-                </div>
-                <div class="sector-change" style="color:#d32f2f">
-                    📈 +0.34%
-                </div>
-                <div class="sector-detail">
-                    价格: $89.51 | 涨跌: $+0.30
-                </div>
-            </div>
-            
-            <div class="sector-card" style="background:#fff8e1; border-left-color:#d32f2f">
-                <div class="sector-header">
-                    <span class="sector-name">Technology</span>
-                    <span class="sector-symbol">XLK</span>
-                </div>
-                <div class="sector-change" style="color:#d32f2f">
-                    📈 +0.25%
-                </div>
-                <div class="sector-detail">
-                    价格: $139.56 | 涨跌: $+0.35
-                </div>
-            </div>
-            
-            <div class="sector-card" style="background:#fff8e1; border-left-color:#d32f2f">
-                <div class="sector-header">
-                    <span class="sector-name">Consumer Discretionary</span>
-                    <span class="sector-symbol">XLY</span>
-                </div>
-                <div class="sector-change" style="color:#d32f2f">
-                    📈 +0.04%
-                </div>
-                <div class="sector-detail">
-                    价格: $116.18 | 涨跌: $+0.05
-                </div>
-            </div>
-            
-            <div class="sector-card" style="background:#f1f8e9; border-left-color:#388e3c">
-                <div class="sector-header">
-                    <span class="sector-name">Communication Services</span>
-                    <span class="sector-symbol">XLC</span>
-                </div>
-                <div class="sector-change" style="color:#388e3c">
-                    📉 -0.05%
-                </div>
-                <div class="sector-detail">
-                    价格: $114.58 | 涨跌: $-0.06
-                </div>
-            </div>
-            
-            <div class="sector-card" style="background:#f1f8e9; border-left-color:#388e3c">
-                <div class="sector-header">
-                    <span class="sector-name">Financials</span>
-                    <span class="sector-symbol">XLF</span>
-                </div>
-                <div class="sector-change" style="color:#388e3c">
-                    📉 -0.08%
-                </div>
-                <div class="sector-detail">
-                    价格: $51.65 | 涨跌: $-0.04
-                </div>
-            </div>
-            
-                </div>
-                
-                <div class="card" style="margin-top:24px;">
-                    <div class="card-title">🤖 AI 跨市场联动分析</div>
-                    <div style="background:#e3f2fd; padding:12px; border-radius:8px; margin-bottom:16px;">
-                        <strong>市场总结：</strong>美股隔夜表现平稳，建议关注板块轮动机会
+                <div class="sector-card" style="background:#fff; border-left:4px solid #d32f2f">
+                    <div class="sector-header">
+                        <span class="sector-name">医疗(映射医药)</span>
+                        <span class="sector-symbol">XLV</span> 
                     </div>
-                    <p style="color:#999;">暂无板块分析数据</p>
+                    <div class="sector-change" style="color:#d32f2f">
+                        📈 +1.07%
+                    </div>
+                    <div class="sector-detail">
+                        价格: $157.67
+                    </div>
+                </div>
+                
+                <div class="sector-card" style="background:#fff; border-left:4px solid #d32f2f">
+                    <div class="sector-header">
+                        <span class="sector-name">半导体(映射A股芯片)</span>
+                        <span class="sector-symbol">SOXX</span> 
+                    </div>
+                    <div class="sector-change" style="color:#d32f2f">
+                        📈 +0.90%
+                    </div>
+                    <div class="sector-detail">
+                        价格: $354.66
+                    </div>
+                </div>
+                
+                <div class="sector-card" style="background:#fff; border-left:4px solid #d32f2f">
+                    <div class="sector-header">
+                        <span class="sector-name">科技(映射小米/芯片)</span>
+                        <span class="sector-symbol">XLK</span> 
+                    </div>
+                    <div class="sector-change" style="color:#d32f2f">
+                        📈 +0.25%
+                    </div>
+                    <div class="sector-detail">
+                        价格: $139.56
+                    </div>
+                </div>
+                
+                <div class="sector-card" style="background:#fff; border-left:4px solid #d32f2f">
+                    <div class="sector-header">
+                        <span class="sector-name">可选消费(映射汽车/家电)</span>
+                        <span class="sector-symbol">XLY</span> 
+                    </div>
+                    <div class="sector-change" style="color:#d32f2f">
+                        📈 +0.04%
+                    </div>
+                    <div class="sector-detail">
+                        价格: $116.18
+                    </div>
+                </div>
+                
+                <div class="sector-card" style="background:#fff; border-left:4px solid #666">
+                    <div class="sector-header">
+                        <span class="sector-name">中概股互联(港股风向)</span>
+                        <span class="sector-symbol">KWEB</span> 
+                    </div>
+                    <div class="sector-change" style="color:#666">
+                        📉 +0.00%
+                    </div>
+                    <div class="sector-detail">
+                        价格: $32.79
+                    </div>
+                </div>
+                
+                <div class="sector-card" style="background:#fff; border-left:4px solid #388e3c">
+                    <div class="sector-header">
+                        <span class="sector-name">通讯(映射互联网)</span>
+                        <span class="sector-symbol">XLC</span> 
+                    </div>
+                    <div class="sector-change" style="color:#388e3c">
+                        📉 -0.05%
+                    </div>
+                    <div class="sector-detail">
+                        价格: $114.58
+                    </div>
+                </div>
+                
+                </div>
+                <div class="card">
+                    <div class="card-title">🎯 重点关注机会</div>
+                    
                 </div>
             </div>
             
-            <div class="right-col">
+            <div>
                 <div class="card">
-                    <div class="card-title">🎯 今日重点关注</div>
-                    <p style="color:#999;">暂无特别关注</p>
-                </div>
+                    <div class="card-title">HK 港股持仓 (15)</div>
+                    <table>
+                        <thead><tr><th>代码</th><th>行业</th><th>涨跌</th><th>价格</th><th>映射</th></tr></thead>
+                        <tbody>
+                <tr>
+                    <td><strong>再鼎医药</strong><br><small>9688.HK</small></td>
+                    <td>创新药</td>
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +7.37%
+                    </td>
+                    <td>15.59</td>
+                    <td><span class="us-sector-tag">Health Care</span></td>
+                </tr>
                 
-                <div class="card" style="margin-top:24px;">
-                    <div class="card-title">🇭🇰 港股自选股 (0只)</div>
-                    <table class="stock-table">
-                        <thead>
-                            <tr>
-                                <th>名称/代码</th>
-                                <th>行业</th>
-                                <th>涨跌幅</th>
-                                <th>价格</th>
-                                <th>美股映射</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
+                <tr>
+                    <td><strong>微创医疗</strong><br><small>0853.HK</small></td>
+                    <td>医疗器械</td>
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +4.44%
+                    </td>
+                    <td>11.29</td>
+                    <td><span class="us-sector-tag">Health Care</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>速腾聚创</strong><br><small>2498.HK</small></td>
+                    <td>激光雷达/汽车电子</td>
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +3.62%
+                    </td>
+                    <td>34.90</td>
+                    <td><span class="us-sector-tag">Technology</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>固生堂</strong><br><small>2273.HK</small></td>
+                    <td>医疗服务</td>
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +1.03%
+                    </td>
+                    <td>31.24</td>
+                    <td><span class="us-sector-tag">Health Care</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>安踏体育</strong><br><small>2020.HK</small></td>
+                    <td>体育用品</td>
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +0.90%
+                    </td>
+                    <td>84.25</td>
+                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>小米集团</strong><br><small>1810.HK</small></td>
+                    <td>科技/消费电子</td>
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +0.88%
+                    </td>
+                    <td>36.84</td>
+                    <td><span class="us-sector-tag">Technology</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>比亚迪电子</strong><br><small>0285.HK</small></td>
+                    <td>电子制造</td>
+                    <td style="font-weight:bold; color:#666;">
+                        +0.00%
+                    </td>
+                    <td>32.78</td>
+                    <td><span class="us-sector-tag">Technology</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>中国中药</strong><br><small>0570.HK</small></td>
+                    <td>中药</td>
+                    <td style="font-weight:bold; color:#666;">
+                        +0.00%
+                    </td>
+                    <td>2.04</td>
+                    <td><span class="us-sector-tag">Health Care</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>金蝶国际</strong><br><small>0268.HK</small></td>
+                    <td>软件/SaaS</td>
+                    <td style="font-weight:bold; color:#666;">
+                        +0.00%
+                    </td>
+                    <td>11.07</td>
+                    <td><span class="us-sector-tag">Technology</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>JS环球生活</strong><br><small>1691.HK</small></td>
+                    <td>小家电</td>
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.55%
+                    </td>
+                    <td>1.82</td>
+                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>复星医药</strong><br><small>2196.HK</small></td>
+                    <td>医药</td>
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.45%
+                    </td>
+                    <td>20.46</td>
+                    <td><span class="us-sector-tag">Health Care</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>枫叶教育</strong><br><small>1317.HK</small></td>
+                    <td>教育</td>
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.47%
+                    </td>
+                    <td>0.34</td>
+                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>理想汽车</strong><br><small>2015.HK</small></td>
+                    <td>新能源汽车</td>
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -2.23%
+                    </td>
+                    <td>72.30</td>
+                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>美团</strong><br><small>3690.HK</small></td>
+                    <td>互联网/本地生活</td>
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -3.18%
+                    </td>
+                    <td>82.15</td>
+                    <td><span class="us-sector-tag">Consumer Discretionary</span></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>心动公司</strong><br><small>2400.HK</small></td>
+                    <td>游戏</td>
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -3.64%
+                    </td>
+                    <td>78.05</td>
+                    <td><span class="us-sector-tag">Communication Services</span></td>
+                </tr>
+                </tbody>
                     </table>
                 </div>
                 
-                <div class="card" style="margin-top:24px;">
-                    <div class="card-title">🇨🇳 A股自选股 (35只)</div>
-                    <table class="stock-table">
-                        <thead>
-                            <tr>
-                                <th>名称/代码</th>
-                                <th>行业</th>
-                                <th>涨跌幅</th>
-                                <th>价格</th>
-                                <th>美股映射</th>
-                            </tr>
-                        </thead>
+                <div class="card">
+                    <div class="card-title">CN A股持仓 (35)</div>
+                    <table>
+                        <thead><tr><th>代码</th><th>行业</th><th>涨跌</th><th>价格</th><th>映射</th></tr></thead>
                         <tbody>
-                <tr style="background:#fff8e1">
+                <tr>
                     <td><strong>航发控制</strong><br><small>000738.SZ</small></td>
                     <td>航空发动机</td>
-                    <td style="font-weight:bold; color:#d32f2f; font-size:16px;">
-                        +0.07%
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +7.44%
                     </td>
-                    <td>¥0.29</td>
+                    <td>29.45</td>
                     <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
-                <tr style="background:#fff8e1">
+                <tr>
                     <td><strong>恩捷股份</strong><br><small>002812.SZ</small></td>
                     <td>锂电池隔膜</td>
-                    <td style="font-weight:bold; color:#d32f2f; font-size:16px;">
-                        +0.05%
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +4.88%
                     </td>
-                    <td>¥0.65</td>
+                    <td>64.50</td>
                     <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
-                <tr style="background:#fff8e1">
+                <tr>
                     <td><strong>博云新材</strong><br><small>002297.SZ</small></td>
                     <td>航空材料</td>
-                    <td style="font-weight:bold; color:#d32f2f; font-size:16px;">
-                        +0.04%
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +4.44%
                     </td>
-                    <td>¥0.13</td>
+                    <td>13.16</td>
                     <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
-                <tr style="background:#fff8e1">
-                    <td><strong>晶合集成</strong><br><small>688249.SH</small></td>
+                <tr>
+                    <td><strong>晶合集成</strong><br><small>688249.SS</small></td>
                     <td>半导体制造</td>
-                    <td style="font-weight:bold; color:#d32f2f; font-size:16px;">
-                        +0.03%
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +2.83%
                     </td>
-                    <td>¥0.37</td>
+                    <td>37.48</td>
                     <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
-                <tr style="background:#fff8e1">
-                    <td><strong>影石创新</strong><br><small>688775.SH</small></td>
+                <tr>
+                    <td><strong>影石创新</strong><br><small>688775.SS</small></td>
                     <td>智能影像</td>
-                    <td style="font-weight:bold; color:#d32f2f; font-size:16px;">
-                        +0.01%
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +1.36%
                     </td>
-                    <td>¥2.25</td>
+                    <td>224.70</td>
                     <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
-                <tr style="background:#fff8e1">
+                <tr>
                     <td><strong>立讯精密</strong><br><small>002475.SZ</small></td>
                     <td>电子制造</td>
-                    <td style="font-weight:bold; color:#d32f2f; font-size:16px;">
-                        +0.01%
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +0.73%
                     </td>
-                    <td>¥0.51</td>
+                    <td>50.80</td>
                     <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
-                <tr style="background:#fff8e1">
+                <tr>
                     <td><strong>圣邦股份</strong><br><small>300661.SZ</small></td>
                     <td>半导体/模拟芯片</td>
-                    <td style="font-weight:bold; color:#d32f2f; font-size:16px;">
-                        +0.00%
+                    <td style="font-weight:bold; color:#d32f2f;">
+                        +0.47%
                     </td>
-                    <td>¥0.70</td>
+                    <td>70.41</td>
                     <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>七一二</strong><br><small>603712.SH</small></td>
+                <tr>
+                    <td><strong>七一二</strong><br><small>603712.SS</small></td>
                     <td>军工通信</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.00%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.05%
                     </td>
-                    <td>¥0.19</td>
+                    <td>19.44</td>
                     <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>罗莱生活</strong><br><small>002293.SZ</small></td>
                     <td>家纺</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.00%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.38%
                     </td>
-                    <td>¥0.10</td>
+                    <td>10.36</td>
                     <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>之江生物</strong><br><small>688317.SH</small></td>
+                <tr>
+                    <td><strong>之江生物</strong><br><small>688317.SS</small></td>
                     <td>医疗器械</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.52%
                     </td>
-                    <td>¥0.21</td>
+                    <td>20.93</td>
                     <td><span class="us-sector-tag">Health Care</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>盈峰环境</strong><br><small>000967.SZ</small></td>
                     <td>环保</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.66%
                     </td>
-                    <td>¥0.07</td>
+                    <td>7.48</td>
                     <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>招商银行</strong><br><small>600036.SH</small></td>
+                <tr>
+                    <td><strong>招商银行</strong><br><small>600036.SS</small></td>
                     <td>银行</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.72%
                     </td>
-                    <td>¥0.39</td>
+                    <td>38.71</td>
                     <td><span class="us-sector-tag">Financials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>海尔智家</strong><br><small>600690.SH</small></td>
+                <tr>
+                    <td><strong>海尔智家</strong><br><small>600690.SS</small></td>
                     <td>家电</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.73%
                     </td>
-                    <td>¥0.26</td>
+                    <td>25.70</td>
                     <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>上海机场</strong><br><small>600009.SH</small></td>
+                <tr>
+                    <td><strong>上海机场</strong><br><small>600009.SS</small></td>
                     <td>航空运输</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.87%
                     </td>
-                    <td>¥0.31</td>
+                    <td>30.75</td>
                     <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>美的集团</strong><br><small>000333.SZ</small></td>
                     <td>家电</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.94%
                     </td>
-                    <td>¥0.79</td>
+                    <td>79.05</td>
                     <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>比亚迪</strong><br><small>002594.SZ</small></td>
                     <td>新能源汽车</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.98%
                     </td>
-                    <td>¥0.90</td>
+                    <td>90.27</td>
                     <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>乐歌股份</strong><br><small>300729.SZ</small></td>
                     <td>智能家居</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.99%
                     </td>
-                    <td>¥0.14</td>
+                    <td>13.94</td>
                     <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>圣农发展</strong><br><small>002299.SZ</small></td>
                     <td>养殖</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -0.99%
                     </td>
-                    <td>¥0.18</td>
+                    <td>18.01</td>
                     <td><span class="us-sector-tag">Consumer Staples</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>华域汽车</strong><br><small>600741.SH</small></td>
+                <tr>
+                    <td><strong>华域汽车</strong><br><small>600741.SS</small></td>
                     <td>汽车零部件</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.09%
                     </td>
-                    <td>¥0.19</td>
+                    <td>19.05</td>
                     <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>三全食品</strong><br><small>002216.SZ</small></td>
                     <td>食品</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.12%
                     </td>
-                    <td>¥0.11</td>
+                    <td>11.46</td>
                     <td><span class="us-sector-tag">Consumer Staples</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>京东方A</strong><br><small>000725.SZ</small></td>
                     <td>面板/半导体显示</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.18%
                     </td>
-                    <td>¥0.04</td>
+                    <td>4.18</td>
                     <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>东方财富</strong><br><small>300059.SZ</small></td>
                     <td>互联网金融</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.28%
                     </td>
-                    <td>¥0.22</td>
+                    <td>22.37</td>
                     <td><span class="us-sector-tag">Financials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>恒玄科技</strong><br><small>688608.SH</small></td>
+                <tr>
+                    <td><strong>恒玄科技</strong><br><small>688608.SS</small></td>
                     <td>半导体/AI芯片</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.41%
                     </td>
-                    <td>¥2.09</td>
+                    <td>209.01</td>
                     <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>羚锐制药</strong><br><small>600285.SH</small></td>
+                <tr>
+                    <td><strong>羚锐制药</strong><br><small>600285.SS</small></td>
                     <td>中药</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.01%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.47%
                     </td>
-                    <td>¥0.21</td>
+                    <td>21.47</td>
                     <td><span class="us-sector-tag">Health Care</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>富瀚微</strong><br><small>300613.SZ</small></td>
                     <td>半导体/视频芯片</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.02%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.78%
                     </td>
-                    <td>¥0.47</td>
+                    <td>47.01</td>
                     <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>中国平安</strong><br><small>601318.SH</small></td>
+                <tr>
+                    <td><strong>中国平安</strong><br><small>601318.SS</small></td>
                     <td>保险</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.02%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.88%
                     </td>
-                    <td>¥0.65</td>
+                    <td>65.29</td>
                     <td><span class="us-sector-tag">Financials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>绿发电力</strong><br><small>000537.SZ</small></td>
                     <td>电力</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.02%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -1.94%
                     </td>
-                    <td>¥0.09</td>
+                    <td>8.60</td>
                     <td><span class="us-sector-tag">Utilities</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>安克创新</strong><br><small>300866.SZ</small></td>
                     <td>消费电子</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.02%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -2.03%
                     </td>
-                    <td>¥0.99</td>
+                    <td>98.69</td>
                     <td><span class="us-sector-tag">Consumer Discretionary</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>中国中铁</strong><br><small>601390.SH</small></td>
+                <tr>
+                    <td><strong>中国中铁</strong><br><small>601390.SS</small></td>
                     <td>基建</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.02%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -2.31%
                     </td>
-                    <td>¥0.06</td>
+                    <td>5.50</td>
                     <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>云天化</strong><br><small>600096.SH</small></td>
+                <tr>
+                    <td><strong>云天化</strong><br><small>600096.SS</small></td>
                     <td>化工</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.02%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -2.40%
                     </td>
-                    <td>¥0.36</td>
+                    <td>35.78</td>
                     <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>巨星科技</strong><br><small>002444.SZ</small></td>
                     <td>工具制造</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.02%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -2.41%
                     </td>
-                    <td>¥0.36</td>
+                    <td>36.05</td>
                     <td><span class="us-sector-tag">Industrials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>湖北宜化</strong><br><small>000422.SZ</small></td>
                     <td>化工</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.03%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -2.78%
                     </td>
-                    <td>¥0.15</td>
+                    <td>15.41</td>
                     <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>安迪苏</strong><br><small>600299.SH</small></td>
+                <tr>
+                    <td><strong>安迪苏</strong><br><small>600299.SS</small></td>
                     <td>动物营养</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.04%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -3.63%
                     </td>
-                    <td>¥0.10</td>
+                    <td>10.10</td>
                     <td><span class="us-sector-tag">Materials</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
+                <tr>
                     <td><strong>广立微</strong><br><small>301095.SZ</small></td>
                     <td>半导体/EDA</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.04%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -3.92%
                     </td>
-                    <td>¥0.89</td>
+                    <td>89.22</td>
                     <td><span class="us-sector-tag">Technology</span></td>
                 </tr>
                 
-                <tr style="background:#f1f8e9">
-                    <td><strong>中国石油</strong><br><small>601857.SH</small></td>
+                <tr>
+                    <td><strong>中国石油</strong><br><small>601857.SS</small></td>
                     <td>石油石化</td>
-                    <td style="font-weight:bold; color:#388e3c; font-size:16px;">
-                        -0.05%
+                    <td style="font-weight:bold; color:#388e3c;">
+                        -4.53%
                     </td>
-                    <td>¥0.11</td>
+                    <td>10.54</td>
                     <td><span class="us-sector-tag">Energy</span></td>
                 </tr>
                 </tbody>
@@ -751,13 +653,8 @@
         </div>
         
         <div class="footer">
-            <p>🤖 分析引擎: Gemini 2.0 Flash | 📊 数据来源: Yahoo Finance / 东方财富</p>
-            <p>分析生成时间: 2026-02-14 13:59:40 | 
-               <a href="https://github.com/your-username/stock-monitor" style="color:#667eea;">查看项目源码</a>
-            </p>
+            Generated by GitHub Actions & Gemini 1.5 Flash
         </div>
     </div>
-    
-    <div class="update-time">⏱️ 更新于 13:59:40</div>
 </body>
 </html>

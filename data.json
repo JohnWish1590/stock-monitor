@@ -1,688 +1,482 @@
 {
-  "timestamp": "2026-02-14T13:59:40.398103",
-  "us_market": {
-    "sp500": {
-      "price": 6836.17,
-      "change_pct": 0.05
+  "data": {
+    "us_market": {
+      "sp500": {
+        "price": 6836.17,
+        "change_pct": 0.05
+      },
+      "nasdaq": {
+        "price": 22546.67,
+        "change_pct": -0.22
+      }
     },
-    "nasdaq": {
-      "price": 22546.67,
-      "change_pct": -0.22
-    }
-  },
-  "us_sectors": [
-    {
-      "symbol": "XLK",
-      "name": "Technology",
-      "price": 139.56,
-      "change": 0.35,
-      "change_pct": 0.25,
-      "volume": 26635800,
-      "timestamp": "2026-02-14 13:57"
-    },
-    {
-      "symbol": "XLV",
-      "name": "Health Care",
-      "price": 157.67,
-      "change": 1.67,
-      "change_pct": 1.07,
-      "volume": 16647400,
-      "timestamp": "2026-02-14 13:57"
-    },
-    {
-      "symbol": "XLY",
-      "name": "Consumer Discretionary",
-      "price": 116.18,
-      "change": 0.05,
-      "change_pct": 0.04,
-      "volume": 10836200,
-      "timestamp": "2026-02-14 13:57"
-    },
-    {
-      "symbol": "XLF",
-      "name": "Financials",
-      "price": 51.65,
-      "change": -0.04,
-      "change_pct": -0.08,
-      "volume": 56446200,
-      "timestamp": "2026-02-14 13:57"
-    },
-    {
-      "symbol": "XLI",
-      "name": "Industrials",
-      "price": 174.17,
-      "change": 1.42,
-      "change_pct": 0.82,
-      "volume": 13617200,
-      "timestamp": "2026-02-14 13:57"
-    },
-    {
-      "symbol": "XLE",
-      "name": "Energy",
-      "price": 54.35,
-      "change": 0.37,
-      "change_pct": 0.69,
-      "volume": 48370300,
-      "timestamp": "2026-02-14 13:57"
-    },
-    {
-      "symbol": "XLB",
-      "name": "Materials",
-      "price": 53.31,
-      "change": 0.48,
-      "change_pct": 0.91,
-      "volume": 19916000,
-      "timestamp": "2026-02-14 13:57"
-    },
-    {
-      "symbol": "XLP",
-      "name": "Consumer Staples",
-      "price": 89.51,
-      "change": 0.3,
-      "change_pct": 0.34,
-      "volume": 25648300,
-      "timestamp": "2026-02-14 13:57"
-    },
-    {
-      "symbol": "XLU",
-      "name": "Utilities",
-      "price": 46.5,
-      "change": 1.25,
-      "change_pct": 2.76,
-      "volume": 42446800,
-      "timestamp": "2026-02-14 13:57"
-    },
-    {
-      "symbol": "XLC",
-      "name": "Communication Services",
-      "price": 114.58,
-      "change": -0.06,
-      "change_pct": -0.05,
-      "volume": 7423000,
-      "timestamp": "2026-02-14 13:57"
-    }
-  ],
-  "portfolio": {
-    "hk_stocks": [],
-    "a_stocks": [
+    "us_sectors": [
       {
-        "code": "000725.SZ",
-        "name": "京东方A",
-        "sector": "面板/半导体显示",
-        "us_sector": "Technology",
-        "keywords": [
-          "display",
-          "semiconductor",
-          "Apple supplier"
-        ],
-        "price": 0.0418,
-        "change": 0.042300000000000004,
-        "change_pct": -0.0118,
-        "volume": 5374417,
-        "timestamp": "13:58"
+        "code": "XLK",
+        "name": "科技(映射小米/芯片)",
+        "price": 139.56,
+        "change_pct": 0.25,
+        "sector": "",
+        "us_sector": ""
       },
       {
-        "code": "688775.SH",
-        "name": "影石创新",
-        "sector": "智能影像",
-        "us_sector": "Technology",
-        "keywords": [
-          "camera",
-          "electronics",
-          "innovation"
-        ],
-        "price": 2.247,
-        "change": 2.319,
-        "change_pct": 0.013600000000000001,
-        "volume": 19097,
-        "timestamp": "13:58"
+        "code": "XLY",
+        "name": "可选消费(映射汽车/家电)",
+        "price": 116.18,
+        "change_pct": 0.04,
+        "sector": "",
+        "us_sector": ""
       },
       {
-        "code": "688249.SH",
-        "name": "晶合集成",
-        "sector": "半导体制造",
-        "us_sector": "Technology",
-        "keywords": [
-          "semiconductor",
-          "chip manufacturing",
-          "TSMC"
-        ],
-        "price": 0.37479999999999997,
-        "change": 0.38439999999999996,
-        "change_pct": 0.028300000000000002,
-        "volume": 475616,
-        "timestamp": "13:58"
+        "code": "XLV",
+        "name": "医疗(映射医药)",
+        "price": 157.67,
+        "change_pct": 1.07,
+        "sector": "",
+        "us_sector": ""
       },
       {
-        "code": "688608.SH",
-        "name": "恒玄科技",
-        "sector": "半导体/AI芯片",
-        "us_sector": "Technology",
-        "keywords": [
-          "AI chips",
-          "semiconductor",
-          "NVIDIA",
-          "AMD"
-        ],
-        "price": 2.0901,
-        "change": 2.127,
-        "change_pct": -0.0141,
-        "volume": 24297,
-        "timestamp": "13:58"
+        "code": "XLC",
+        "name": "通讯(映射互联网)",
+        "price": 114.58,
+        "change_pct": -0.05,
+        "sector": "",
+        "us_sector": ""
       },
       {
-        "code": "300613.SZ",
-        "name": "富瀚微",
-        "sector": "半导体/视频芯片",
-        "us_sector": "Technology",
-        "keywords": [
-          "video chips",
-          "semiconductor"
-        ],
-        "price": 0.47009999999999996,
-        "change": 0.4814,
-        "change_pct": -0.0178,
-        "volume": 36807,
-        "timestamp": "13:58"
+        "code": "KWEB",
+        "name": "中概股互联(港股风向)",
+        "price": 32.79,
+        "change_pct": 0.0,
+        "sector": "",
+        "us_sector": ""
       },
       {
-        "code": "300661.SZ",
-        "name": "圣邦股份",
-        "sector": "半导体/模拟芯片",
-        "us_sector": "Technology",
-        "keywords": [
-          "analog chips",
-          "semiconductor",
-          "Texas Instruments"
-        ],
-        "price": 0.7041,
-        "change": 0.7240000000000001,
-        "change_pct": 0.004699999999999999,
-        "volume": 149866,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "301095.SZ",
-        "name": "广立微",
-        "sector": "半导体/EDA",
-        "us_sector": "Technology",
-        "keywords": [
-          "EDA",
-          "semiconductor software",
-          "Synopsys"
-        ],
-        "price": 0.8922,
-        "change": 0.9177,
-        "change_pct": -0.0392,
-        "volume": 101873,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "300866.SZ",
-        "name": "安克创新",
-        "sector": "消费电子",
-        "us_sector": "Consumer Discretionary",
-        "keywords": [
-          "consumer electronics",
-          "Amazon",
-          "charging"
-        ],
-        "price": 0.9869,
-        "change": 1.0086,
-        "change_pct": -0.0203,
-        "volume": 21086,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "002475.SZ",
-        "name": "立讯精密",
-        "sector": "电子制造",
-        "us_sector": "Technology",
-        "keywords": [
-          "Apple supplier",
-          "manufacturing",
-          "Foxconn"
-        ],
-        "price": 0.508,
-        "change": 0.5108,
-        "change_pct": 0.0073,
-        "volume": 1144926,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "002594.SZ",
-        "name": "比亚迪",
-        "sector": "新能源汽车",
-        "us_sector": "Consumer Discretionary",
-        "keywords": [
-          "BYD",
-          "Tesla",
-          "EV",
-          "battery"
-        ],
-        "price": 0.9027,
-        "change": 0.9109,
-        "change_pct": -0.0098,
-        "volume": 217339,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "600741.SH",
-        "name": "华域汽车",
-        "sector": "汽车零部件",
-        "us_sector": "Consumer Discretionary",
-        "keywords": [
-          "auto parts",
-          "Tesla supplier",
-          "EV"
-        ],
-        "price": 0.1905,
-        "change": 0.1924,
-        "change_pct": -0.0109,
-        "volume": 65990,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "002812.SZ",
-        "name": "恩捷股份",
-        "sector": "锂电池隔膜",
-        "us_sector": "Materials",
-        "keywords": [
-          "battery",
-          "lithium",
-          "EV",
-          "Tesla"
-        ],
-        "price": 0.645,
-        "change": 0.655,
-        "change_pct": 0.048799999999999996,
-        "volume": 410928,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "000738.SZ",
-        "name": "航发控制",
-        "sector": "航空发动机",
-        "us_sector": "Industrials",
-        "keywords": [
-          "aerospace",
-          "defense",
-          "GE",
-          "Rolls-Royce"
-        ],
-        "price": 0.2945,
-        "change": 0.3015,
-        "change_pct": 0.07440000000000001,
-        "volume": 1090928,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "603712.SH",
-        "name": "七一二",
-        "sector": "军工通信",
-        "us_sector": "Industrials",
-        "keywords": [
-          "defense",
-          "communication",
-          "military"
-        ],
-        "price": 0.19440000000000002,
-        "change": 0.1977,
-        "change_pct": -0.0005,
-        "volume": 85670,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "002297.SZ",
-        "name": "博云新材",
-        "sector": "航空材料",
-        "us_sector": "Materials",
-        "keywords": [
-          "aerospace materials",
-          "Boeing",
-          "Airbus"
-        ],
-        "price": 0.1316,
-        "change": 0.1328,
-        "change_pct": 0.0444,
-        "volume": 780890,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "601318.SH",
-        "name": "中国平安",
-        "sector": "保险",
-        "us_sector": "Financials",
-        "keywords": [
-          "insurance",
-          "Berkshire Hathaway",
-          "financial"
-        ],
-        "price": 0.6529,
-        "change": 0.6635,
-        "change_pct": -0.018799999999999997,
-        "volume": 840772,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "600036.SH",
-        "name": "招商银行",
-        "sector": "银行",
-        "us_sector": "Financials",
-        "keywords": [
-          "banking",
-          "JPMorgan",
-          "financial"
-        ],
-        "price": 0.3871,
-        "change": 0.3909,
-        "change_pct": -0.0072,
-        "volume": 705370,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "300059.SZ",
-        "name": "东方财富",
-        "sector": "互联网金融",
-        "us_sector": "Financials",
-        "keywords": [
-          "fintech",
-          "brokerage",
-          "Charles Schwab"
-        ],
-        "price": 0.2237,
-        "change": 0.22820000000000001,
-        "change_pct": -0.0128,
-        "volume": 2054685,
-        "timestamp": "13:58"
-      },
-      {
-        "code": "601857.SH",
-        "name": "中国石油",
-        "sector": "石油石化",
-        "us_sector": "Energy",
-        "keywords": [
-          "oil",
-          "ExxonMobil",
-          "energy"
-        ],
-        "price": 0.1054,
-        "change": 0.10800000000000001,
-        "change_pct": -0.0453,
-        "volume": 2604602,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "000333.SZ",
-        "name": "美的集团",
-        "sector": "家电",
-        "us_sector": "Consumer Discretionary",
-        "keywords": [
-          "home appliances",
-          "consumer",
-          "Whirlpool"
-        ],
-        "price": 0.7905,
-        "change": 0.8,
-        "change_pct": -0.009399999999999999,
-        "volume": 255102,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "600690.SH",
-        "name": "海尔智家",
-        "sector": "家电",
-        "us_sector": "Consumer Discretionary",
-        "keywords": [
-          "home appliances",
-          "consumer",
-          "GE Appliances"
-        ],
-        "price": 0.257,
-        "change": 0.2588,
-        "change_pct": -0.0073,
-        "volume": 267152,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "601390.SH",
-        "name": "中国中铁",
-        "sector": "基建",
-        "us_sector": "Industrials",
-        "keywords": [
-          "infrastructure",
-          "construction",
-          "Caterpillar"
-        ],
-        "price": 0.055,
-        "change": 0.0558,
-        "change_pct": -0.0231,
-        "volume": 2686660,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "600009.SH",
-        "name": "上海机场",
-        "sector": "航空运输",
-        "us_sector": "Industrials",
-        "keywords": [
-          "aviation",
-          "airport",
-          "travel",
-          "Boeing"
-        ],
-        "price": 0.3075,
-        "change": 0.311,
-        "change_pct": -0.0087,
-        "volume": 92659,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "000422.SZ",
-        "name": "湖北宜化",
-        "sector": "化工",
-        "us_sector": "Materials",
-        "keywords": [
-          "chemicals",
-          "fertilizer",
-          "materials"
-        ],
-        "price": 0.15410000000000001,
-        "change": 0.15789999999999998,
-        "change_pct": -0.0278,
-        "volume": 275970,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "600096.SH",
-        "name": "云天化",
-        "sector": "化工",
-        "us_sector": "Materials",
-        "keywords": [
-          "chemicals",
-          "fertilizer",
-          "materials"
-        ],
-        "price": 0.3578,
-        "change": 0.36369999999999997,
-        "change_pct": -0.024,
-        "volume": 280298,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "000537.SZ",
-        "name": "绿发电力",
-        "sector": "电力",
-        "us_sector": "Utilities",
-        "keywords": [
-          "power",
-          "utilities",
-          "renewable energy"
-        ],
-        "price": 0.086,
-        "change": 0.0877,
-        "change_pct": -0.0194,
-        "volume": 196033,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "000967.SZ",
-        "name": "盈峰环境",
-        "sector": "环保",
-        "us_sector": "Industrials",
-        "keywords": [
-          "environmental",
-          "waste management",
-          "industrial"
-        ],
-        "price": 0.0748,
-        "change": 0.0776,
-        "change_pct": -0.0066,
-        "volume": 419341,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "300729.SZ",
-        "name": "乐歌股份",
-        "sector": "智能家居",
-        "us_sector": "Consumer Discretionary",
-        "keywords": [
-          "smart home",
-          "furniture",
-          "Wayfair"
-        ],
-        "price": 0.1394,
-        "change": 0.142,
-        "change_pct": -0.009899999999999999,
-        "volume": 27155,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "002444.SZ",
-        "name": "巨星科技",
-        "sector": "工具制造",
-        "us_sector": "Industrials",
-        "keywords": [
-          "tools",
-          "manufacturing",
-          "Stanley Black & Decker"
-        ],
-        "price": 0.3605,
-        "change": 0.36939999999999995,
-        "change_pct": -0.0241,
-        "volume": 95336,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "688317.SH",
-        "name": "之江生物",
-        "sector": "医疗器械",
-        "us_sector": "Health Care",
-        "keywords": [
-          "medical devices",
-          "biotech",
-          "healthcare"
-        ],
-        "price": 0.20929999999999999,
-        "change": 0.2118,
-        "change_pct": -0.0052,
-        "volume": 18570,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "600285.SH",
-        "name": "羚锐制药",
-        "sector": "中药",
-        "us_sector": "Health Care",
-        "keywords": [
-          "pharma",
-          "traditional medicine",
-          "healthcare"
-        ],
-        "price": 0.2147,
-        "change": 0.21850000000000003,
-        "change_pct": -0.0147,
-        "volume": 40313,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "600299.SH",
-        "name": "安迪苏",
-        "sector": "动物营养",
-        "us_sector": "Materials",
-        "keywords": [
-          "animal nutrition",
-          "chemicals",
-          "materials"
-        ],
-        "price": 0.10099999999999999,
-        "change": 0.1047,
-        "change_pct": -0.0363,
-        "volume": 170835,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "002216.SZ",
-        "name": "三全食品",
-        "sector": "食品",
-        "us_sector": "Consumer Staples",
-        "keywords": [
-          "food",
-          "frozen food",
-          "consumer staples",
-          "Nestle"
-        ],
-        "price": 0.11460000000000001,
-        "change": 0.1167,
-        "change_pct": -0.011200000000000002,
-        "volume": 88364,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "002293.SZ",
-        "name": "罗莱生活",
-        "sector": "家纺",
-        "us_sector": "Consumer Discretionary",
-        "keywords": [
-          "home textiles",
-          "consumer"
-        ],
-        "price": 0.1036,
-        "change": 0.1045,
-        "change_pct": -0.0038,
-        "volume": 50973,
-        "timestamp": "13:59"
-      },
-      {
-        "code": "002299.SZ",
-        "name": "圣农发展",
-        "sector": "养殖",
-        "us_sector": "Consumer Staples",
-        "keywords": [
-          "poultry",
-          "food",
-          "Tyson Foods",
-          "consumer staples"
-        ],
-        "price": 0.1801,
-        "change": 0.1837,
-        "change_pct": -0.009899999999999999,
-        "volume": 123804,
-        "timestamp": "13:59"
+        "code": "SOXX",
+        "name": "半导体(映射A股芯片)",
+        "price": 354.66,
+        "change_pct": 0.9,
+        "sector": "",
+        "us_sector": ""
       }
     ],
-    "update_time": "2026-02-14 13:59:40"
+    "portfolio": {
+      "hk_stocks": [
+        {
+          "code": "2020.HK",
+          "name": "安踏体育",
+          "price": 84.25,
+          "change_pct": 0.9,
+          "sector": "体育用品",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "1810.HK",
+          "name": "小米集团",
+          "price": 36.84,
+          "change_pct": 0.88,
+          "sector": "科技/消费电子",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "3690.HK",
+          "name": "美团",
+          "price": 82.15,
+          "change_pct": -3.18,
+          "sector": "互联网/本地生活",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "2015.HK",
+          "name": "理想汽车",
+          "price": 72.3,
+          "change_pct": -2.23,
+          "sector": "新能源汽车",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "2400.HK",
+          "name": "心动公司",
+          "price": 78.05,
+          "change_pct": -3.64,
+          "sector": "游戏",
+          "us_sector": "Communication Services"
+        },
+        {
+          "code": "2273.HK",
+          "name": "固生堂",
+          "price": 31.24,
+          "change_pct": 1.03,
+          "sector": "医疗服务",
+          "us_sector": "Health Care"
+        },
+        {
+          "code": "0285.HK",
+          "name": "比亚迪电子",
+          "price": 32.78,
+          "change_pct": 0.0,
+          "sector": "电子制造",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "2196.HK",
+          "name": "复星医药",
+          "price": 20.46,
+          "change_pct": -1.45,
+          "sector": "医药",
+          "us_sector": "Health Care"
+        },
+        {
+          "code": "0853.HK",
+          "name": "微创医疗",
+          "price": 11.29,
+          "change_pct": 4.44,
+          "sector": "医疗器械",
+          "us_sector": "Health Care"
+        },
+        {
+          "code": "9688.HK",
+          "name": "再鼎医药",
+          "price": 15.59,
+          "change_pct": 7.37,
+          "sector": "创新药",
+          "us_sector": "Health Care"
+        },
+        {
+          "code": "0570.HK",
+          "name": "中国中药",
+          "price": 2.04,
+          "change_pct": 0.0,
+          "sector": "中药",
+          "us_sector": "Health Care"
+        },
+        {
+          "code": "0268.HK",
+          "name": "金蝶国际",
+          "price": 11.07,
+          "change_pct": 0.0,
+          "sector": "软件/SaaS",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "2498.HK",
+          "name": "速腾聚创",
+          "price": 34.9,
+          "change_pct": 3.62,
+          "sector": "激光雷达/汽车电子",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "1691.HK",
+          "name": "JS环球生活",
+          "price": 1.82,
+          "change_pct": -0.55,
+          "sector": "小家电",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "1317.HK",
+          "name": "枫叶教育",
+          "price": 0.34,
+          "change_pct": -1.47,
+          "sector": "教育",
+          "us_sector": "Consumer Discretionary"
+        }
+      ],
+      "a_stocks": [
+        {
+          "code": "000725.SZ",
+          "name": "京东方A",
+          "price": 4.18,
+          "change_pct": -1.18,
+          "sector": "面板/半导体显示",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "688775.SS",
+          "name": "影石创新",
+          "price": 224.7,
+          "change_pct": 1.36,
+          "sector": "智能影像",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "688249.SS",
+          "name": "晶合集成",
+          "price": 37.48,
+          "change_pct": 2.83,
+          "sector": "半导体制造",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "688608.SS",
+          "name": "恒玄科技",
+          "price": 209.01,
+          "change_pct": -1.41,
+          "sector": "半导体/AI芯片",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "300613.SZ",
+          "name": "富瀚微",
+          "price": 47.01,
+          "change_pct": -1.78,
+          "sector": "半导体/视频芯片",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "300661.SZ",
+          "name": "圣邦股份",
+          "price": 70.41,
+          "change_pct": 0.47,
+          "sector": "半导体/模拟芯片",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "301095.SZ",
+          "name": "广立微",
+          "price": 89.22,
+          "change_pct": -3.92,
+          "sector": "半导体/EDA",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "300866.SZ",
+          "name": "安克创新",
+          "price": 98.69,
+          "change_pct": -2.03,
+          "sector": "消费电子",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "002475.SZ",
+          "name": "立讯精密",
+          "price": 50.8,
+          "change_pct": 0.73,
+          "sector": "电子制造",
+          "us_sector": "Technology"
+        },
+        {
+          "code": "002594.SZ",
+          "name": "比亚迪",
+          "price": 90.27,
+          "change_pct": -0.98,
+          "sector": "新能源汽车",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "600741.SS",
+          "name": "华域汽车",
+          "price": 19.05,
+          "change_pct": -1.09,
+          "sector": "汽车零部件",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "002812.SZ",
+          "name": "恩捷股份",
+          "price": 64.5,
+          "change_pct": 4.88,
+          "sector": "锂电池隔膜",
+          "us_sector": "Materials"
+        },
+        {
+          "code": "000738.SZ",
+          "name": "航发控制",
+          "price": 29.45,
+          "change_pct": 7.44,
+          "sector": "航空发动机",
+          "us_sector": "Industrials"
+        },
+        {
+          "code": "603712.SS",
+          "name": "七一二",
+          "price": 19.44,
+          "change_pct": -0.05,
+          "sector": "军工通信",
+          "us_sector": "Industrials"
+        },
+        {
+          "code": "002297.SZ",
+          "name": "博云新材",
+          "price": 13.16,
+          "change_pct": 4.44,
+          "sector": "航空材料",
+          "us_sector": "Materials"
+        },
+        {
+          "code": "601318.SS",
+          "name": "中国平安",
+          "price": 65.29,
+          "change_pct": -1.88,
+          "sector": "保险",
+          "us_sector": "Financials"
+        },
+        {
+          "code": "600036.SS",
+          "name": "招商银行",
+          "price": 38.71,
+          "change_pct": -0.72,
+          "sector": "银行",
+          "us_sector": "Financials"
+        },
+        {
+          "code": "300059.SZ",
+          "name": "东方财富",
+          "price": 22.37,
+          "change_pct": -1.28,
+          "sector": "互联网金融",
+          "us_sector": "Financials"
+        },
+        {
+          "code": "601857.SS",
+          "name": "中国石油",
+          "price": 10.54,
+          "change_pct": -4.53,
+          "sector": "石油石化",
+          "us_sector": "Energy"
+        },
+        {
+          "code": "000333.SZ",
+          "name": "美的集团",
+          "price": 79.05,
+          "change_pct": -0.94,
+          "sector": "家电",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "600690.SS",
+          "name": "海尔智家",
+          "price": 25.7,
+          "change_pct": -0.73,
+          "sector": "家电",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "601390.SS",
+          "name": "中国中铁",
+          "price": 5.5,
+          "change_pct": -2.31,
+          "sector": "基建",
+          "us_sector": "Industrials"
+        },
+        {
+          "code": "600009.SS",
+          "name": "上海机场",
+          "price": 30.75,
+          "change_pct": -0.87,
+          "sector": "航空运输",
+          "us_sector": "Industrials"
+        },
+        {
+          "code": "000422.SZ",
+          "name": "湖北宜化",
+          "price": 15.41,
+          "change_pct": -2.78,
+          "sector": "化工",
+          "us_sector": "Materials"
+        },
+        {
+          "code": "600096.SS",
+          "name": "云天化",
+          "price": 35.78,
+          "change_pct": -2.4,
+          "sector": "化工",
+          "us_sector": "Materials"
+        },
+        {
+          "code": "000537.SZ",
+          "name": "绿发电力",
+          "price": 8.6,
+          "change_pct": -1.94,
+          "sector": "电力",
+          "us_sector": "Utilities"
+        },
+        {
+          "code": "000967.SZ",
+          "name": "盈峰环境",
+          "price": 7.48,
+          "change_pct": -0.66,
+          "sector": "环保",
+          "us_sector": "Industrials"
+        },
+        {
+          "code": "300729.SZ",
+          "name": "乐歌股份",
+          "price": 13.94,
+          "change_pct": -0.99,
+          "sector": "智能家居",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "002444.SZ",
+          "name": "巨星科技",
+          "price": 36.05,
+          "change_pct": -2.41,
+          "sector": "工具制造",
+          "us_sector": "Industrials"
+        },
+        {
+          "code": "688317.SS",
+          "name": "之江生物",
+          "price": 20.93,
+          "change_pct": -0.52,
+          "sector": "医疗器械",
+          "us_sector": "Health Care"
+        },
+        {
+          "code": "600285.SS",
+          "name": "羚锐制药",
+          "price": 21.47,
+          "change_pct": -1.47,
+          "sector": "中药",
+          "us_sector": "Health Care"
+        },
+        {
+          "code": "600299.SS",
+          "name": "安迪苏",
+          "price": 10.1,
+          "change_pct": -3.63,
+          "sector": "动物营养",
+          "us_sector": "Materials"
+        },
+        {
+          "code": "002216.SZ",
+          "name": "三全食品",
+          "price": 11.46,
+          "change_pct": -1.12,
+          "sector": "食品",
+          "us_sector": "Consumer Staples"
+        },
+        {
+          "code": "002293.SZ",
+          "name": "罗莱生活",
+          "price": 10.36,
+          "change_pct": -0.38,
+          "sector": "家纺",
+          "us_sector": "Consumer Discretionary"
+        },
+        {
+          "code": "002299.SZ",
+          "name": "圣农发展",
+          "price": 18.01,
+          "change_pct": -0.99,
+          "sector": "养殖",
+          "us_sector": "Consumer Staples"
+        }
+      ]
+    },
+    "collected_at": "2026-02-14 14:12:33"
   },
   "analysis": {
-    "market_summary": "美股隔夜表现平稳，建议关注板块轮动机会",
+    "market_summary": "⚠️ AI 服务暂时不可用: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
     "sector_analysis": [],
     "top_picks": [],
     "risk_alerts": [
-      "AI分析服务暂时不可用，请手动判断"
+      "API 调用异常"
     ],
-    "trading_strategy": "建议观望，等待开盘后的市场方向明确",
-    "generated_at": "2026-02-14 13:59:40",
-    "data_timestamp": "2026-02-14 13:59:40",
+    "trading_strategy": "暂停操作",
+    "generated_at": "2026-02-14 14:12:33",
     "fallback": true
   }
 }
