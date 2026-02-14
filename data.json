@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-14T13:28:33.811584",
+  "timestamp": "2026-02-14T13:59:40.398103",
   "us_market": {
     "sp500": {
       "price": 6836.17,
@@ -18,7 +18,7 @@
       "change": 0.35,
       "change_pct": 0.25,
       "volume": 26635800,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     },
     {
       "symbol": "XLV",
@@ -27,7 +27,7 @@
       "change": 1.67,
       "change_pct": 1.07,
       "volume": 16647400,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     },
     {
       "symbol": "XLY",
@@ -36,7 +36,7 @@
       "change": 0.05,
       "change_pct": 0.04,
       "volume": 10836200,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     },
     {
       "symbol": "XLF",
@@ -45,7 +45,7 @@
       "change": -0.04,
       "change_pct": -0.08,
       "volume": 56446200,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     },
     {
       "symbol": "XLI",
@@ -54,7 +54,7 @@
       "change": 1.42,
       "change_pct": 0.82,
       "volume": 13617200,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     },
     {
       "symbol": "XLE",
@@ -63,7 +63,7 @@
       "change": 0.37,
       "change_pct": 0.69,
       "volume": 48370300,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     },
     {
       "symbol": "XLB",
@@ -72,7 +72,7 @@
       "change": 0.48,
       "change_pct": 0.91,
       "volume": 19916000,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     },
     {
       "symbol": "XLP",
@@ -81,7 +81,7 @@
       "change": 0.3,
       "change_pct": 0.34,
       "volume": 25648300,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     },
     {
       "symbol": "XLU",
@@ -90,7 +90,7 @@
       "change": 1.25,
       "change_pct": 2.76,
       "volume": 42446800,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     },
     {
       "symbol": "XLC",
@@ -99,7 +99,7 @@
       "change": -0.06,
       "change_pct": -0.05,
       "volume": 7423000,
-      "timestamp": "2026-02-14 13:25"
+      "timestamp": "2026-02-14 13:57"
     }
   ],
   "portfolio": {
@@ -119,7 +119,7 @@
         "change": 0.042300000000000004,
         "change_pct": -0.0118,
         "volume": 5374417,
-        "timestamp": "13:26"
+        "timestamp": "13:58"
       },
       {
         "code": "688775.SH",
@@ -135,7 +135,7 @@
         "change": 2.319,
         "change_pct": 0.013600000000000001,
         "volume": 19097,
-        "timestamp": "13:26"
+        "timestamp": "13:58"
       },
       {
         "code": "688249.SH",
@@ -151,7 +151,7 @@
         "change": 0.38439999999999996,
         "change_pct": 0.028300000000000002,
         "volume": 475616,
-        "timestamp": "13:26"
+        "timestamp": "13:58"
       },
       {
         "code": "688608.SH",
@@ -168,7 +168,7 @@
         "change": 2.127,
         "change_pct": -0.0141,
         "volume": 24297,
-        "timestamp": "13:26"
+        "timestamp": "13:58"
       },
       {
         "code": "300613.SZ",
@@ -183,7 +183,7 @@
         "change": 0.4814,
         "change_pct": -0.0178,
         "volume": 36807,
-        "timestamp": "13:26"
+        "timestamp": "13:58"
       },
       {
         "code": "300661.SZ",
@@ -199,7 +199,7 @@
         "change": 0.7240000000000001,
         "change_pct": 0.004699999999999999,
         "volume": 149866,
-        "timestamp": "13:26"
+        "timestamp": "13:58"
       },
       {
         "code": "301095.SZ",
@@ -215,7 +215,7 @@
         "change": 0.9177,
         "change_pct": -0.0392,
         "volume": 101873,
-        "timestamp": "13:26"
+        "timestamp": "13:58"
       },
       {
         "code": "300866.SZ",
@@ -231,7 +231,106 @@
         "change": 1.0086,
         "change_pct": -0.0203,
         "volume": 21086,
-        "timestamp": "13:26"
+        "timestamp": "13:58"
+      },
+      {
+        "code": "002475.SZ",
+        "name": "立讯精密",
+        "sector": "电子制造",
+        "us_sector": "Technology",
+        "keywords": [
+          "Apple supplier",
+          "manufacturing",
+          "Foxconn"
+        ],
+        "price": 0.508,
+        "change": 0.5108,
+        "change_pct": 0.0073,
+        "volume": 1144926,
+        "timestamp": "13:58"
+      },
+      {
+        "code": "002594.SZ",
+        "name": "比亚迪",
+        "sector": "新能源汽车",
+        "us_sector": "Consumer Discretionary",
+        "keywords": [
+          "BYD",
+          "Tesla",
+          "EV",
+          "battery"
+        ],
+        "price": 0.9027,
+        "change": 0.9109,
+        "change_pct": -0.0098,
+        "volume": 217339,
+        "timestamp": "13:58"
+      },
+      {
+        "code": "600741.SH",
+        "name": "华域汽车",
+        "sector": "汽车零部件",
+        "us_sector": "Consumer Discretionary",
+        "keywords": [
+          "auto parts",
+          "Tesla supplier",
+          "EV"
+        ],
+        "price": 0.1905,
+        "change": 0.1924,
+        "change_pct": -0.0109,
+        "volume": 65990,
+        "timestamp": "13:58"
+      },
+      {
+        "code": "002812.SZ",
+        "name": "恩捷股份",
+        "sector": "锂电池隔膜",
+        "us_sector": "Materials",
+        "keywords": [
+          "battery",
+          "lithium",
+          "EV",
+          "Tesla"
+        ],
+        "price": 0.645,
+        "change": 0.655,
+        "change_pct": 0.048799999999999996,
+        "volume": 410928,
+        "timestamp": "13:58"
+      },
+      {
+        "code": "000738.SZ",
+        "name": "航发控制",
+        "sector": "航空发动机",
+        "us_sector": "Industrials",
+        "keywords": [
+          "aerospace",
+          "defense",
+          "GE",
+          "Rolls-Royce"
+        ],
+        "price": 0.2945,
+        "change": 0.3015,
+        "change_pct": 0.07440000000000001,
+        "volume": 1090928,
+        "timestamp": "13:58"
+      },
+      {
+        "code": "603712.SH",
+        "name": "七一二",
+        "sector": "军工通信",
+        "us_sector": "Industrials",
+        "keywords": [
+          "defense",
+          "communication",
+          "military"
+        ],
+        "price": 0.19440000000000002,
+        "change": 0.1977,
+        "change_pct": -0.0005,
+        "volume": 85670,
+        "timestamp": "13:58"
       },
       {
         "code": "002297.SZ",
@@ -247,7 +346,7 @@
         "change": 0.1328,
         "change_pct": 0.0444,
         "volume": 780890,
-        "timestamp": "13:27"
+        "timestamp": "13:58"
       },
       {
         "code": "601318.SH",
@@ -263,7 +362,7 @@
         "change": 0.6635,
         "change_pct": -0.018799999999999997,
         "volume": 840772,
-        "timestamp": "13:27"
+        "timestamp": "13:58"
       },
       {
         "code": "600036.SH",
@@ -279,7 +378,7 @@
         "change": 0.3909,
         "change_pct": -0.0072,
         "volume": 705370,
-        "timestamp": "13:27"
+        "timestamp": "13:58"
       },
       {
         "code": "300059.SZ",
@@ -295,7 +394,7 @@
         "change": 0.22820000000000001,
         "change_pct": -0.0128,
         "volume": 2054685,
-        "timestamp": "13:27"
+        "timestamp": "13:58"
       },
       {
         "code": "601857.SH",
@@ -311,7 +410,7 @@
         "change": 0.10800000000000001,
         "change_pct": -0.0453,
         "volume": 2604602,
-        "timestamp": "13:27"
+        "timestamp": "13:59"
       },
       {
         "code": "000333.SZ",
@@ -327,7 +426,7 @@
         "change": 0.8,
         "change_pct": -0.009399999999999999,
         "volume": 255102,
-        "timestamp": "13:27"
+        "timestamp": "13:59"
       },
       {
         "code": "600690.SH",
@@ -343,7 +442,7 @@
         "change": 0.2588,
         "change_pct": -0.0073,
         "volume": 267152,
-        "timestamp": "13:27"
+        "timestamp": "13:59"
       },
       {
         "code": "601390.SH",
@@ -359,7 +458,7 @@
         "change": 0.0558,
         "change_pct": -0.0231,
         "volume": 2686660,
-        "timestamp": "13:27"
+        "timestamp": "13:59"
       },
       {
         "code": "600009.SH",
@@ -376,7 +475,7 @@
         "change": 0.311,
         "change_pct": -0.0087,
         "volume": 92659,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "000422.SZ",
@@ -392,7 +491,7 @@
         "change": 0.15789999999999998,
         "change_pct": -0.0278,
         "volume": 275970,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "600096.SH",
@@ -408,7 +507,7 @@
         "change": 0.36369999999999997,
         "change_pct": -0.024,
         "volume": 280298,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "000537.SZ",
@@ -424,7 +523,7 @@
         "change": 0.0877,
         "change_pct": -0.0194,
         "volume": 196033,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "000967.SZ",
@@ -440,7 +539,7 @@
         "change": 0.0776,
         "change_pct": -0.0066,
         "volume": 419341,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "300729.SZ",
@@ -456,7 +555,7 @@
         "change": 0.142,
         "change_pct": -0.009899999999999999,
         "volume": 27155,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "002444.SZ",
@@ -472,7 +571,7 @@
         "change": 0.36939999999999995,
         "change_pct": -0.0241,
         "volume": 95336,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "688317.SH",
@@ -488,7 +587,7 @@
         "change": 0.2118,
         "change_pct": -0.0052,
         "volume": 18570,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "600285.SH",
@@ -504,7 +603,7 @@
         "change": 0.21850000000000003,
         "change_pct": -0.0147,
         "volume": 40313,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "600299.SH",
@@ -520,7 +619,7 @@
         "change": 0.1047,
         "change_pct": -0.0363,
         "volume": 170835,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "002216.SZ",
@@ -537,7 +636,7 @@
         "change": 0.1167,
         "change_pct": -0.011200000000000002,
         "volume": 88364,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "002293.SZ",
@@ -552,7 +651,7 @@
         "change": 0.1045,
         "change_pct": -0.0038,
         "volume": 50973,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       },
       {
         "code": "002299.SZ",
@@ -569,10 +668,10 @@
         "change": 0.1837,
         "change_pct": -0.009899999999999999,
         "volume": 123804,
-        "timestamp": "13:28"
+        "timestamp": "13:59"
       }
     ],
-    "update_time": "2026-02-14 13:28:33"
+    "update_time": "2026-02-14 13:59:40"
   },
   "analysis": {
     "market_summary": "美股隔夜表现平稳，建议关注板块轮动机会",
@@ -582,8 +681,8 @@
       "AI分析服务暂时不可用，请手动判断"
     ],
     "trading_strategy": "建议观望，等待开盘后的市场方向明确",
-    "generated_at": "2026-02-14 13:28:33",
-    "data_timestamp": "2026-02-14 13:28:33",
+    "generated_at": "2026-02-14 13:59:40",
+    "data_timestamp": "2026-02-14 13:59:40",
     "fallback": true
   }
 }
