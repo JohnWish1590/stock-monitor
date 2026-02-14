@@ -6,15 +6,21 @@ import traceback
 class PortfolioAnalyzer:
     def __init__(self, api_key):
         genai.configure(api_key=api_key)
-        # 这里不指定模型，在调用时指定
+        # 🔥 修复：换用 Flash 模型，它是免费版最稳的选择，不会 404
+        self.model = genai.GenerativeModel('gemini-1.5-flash')
         
     def analyze(self, data):
-        # 1. 准备数据
+        print("🧠 [AI大脑] Gemini 1.5 Flash 正在进行深度归因...")
+        
+        # 1. 准备数据 string
         us_text = "\n".join([f"- {s['name']}({s['code']}): {s['change_pct']:+.2f}%" for s in data['us_sectors']])
+        
         all_stocks = data['portfolio']['hk_stocks'] + data['portfolio']['a_stocks']
-        valid_stocks = [s for s in all_stocks if s['price'] > 0]
-        top_movers = sorted(valid_stocks, key=lambda x: abs(x['change_pct']), reverse=True)[:15]
-        stock_text = "\n".join([f"- {s['name']}({s['code']}) [{s['sector']}]: {s['change_pct']:+.2f}%" for s in top_movers])
+        # 过滤无效数据并排序
+        valid_stocks = [s for s in all_stocks if s.get('price', 0) > 0]
+        top_movers = sorted(valid_stocks, key=lambda x: abs(x.get('change_pct', 0)), reverse=True)[:15]
+        
+        stock_text = "\n".join([f"- {s['name']}({s['code']}) [{s['sector']}]: {s.get('change_pct', 0):+.2f}%" for s in top_movers])
 
         prompt = f"""
         你是我（用户）的【首席基金经理】。现在是北京时间 {datetime.now().strftime('%Y-%m-%d %H:%M')}。
@@ -55,43 +61,32 @@ class PortfolioAnalyzer:
         }}
         """
 
-        # 🔥 核心逻辑：模型梯队尝试 🔥
-        # 1. 先试最好的 Pro (逻辑最强)
-        # 2. 不行就试 Flash (速度最快)
-        # 3. 还是不行就试 Pro 1.0 (兼容性最强)
-        models_to_try = ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro']
-        
-        for model_name in models_to_try:
-            print(f"🧠 [AI大脑] 正在尝试唤醒 {model_name} ...")
-            try:
-                model = genai.GenerativeModel(model_name)
-                response = model.generate_content(
-                    prompt,
-                    generation_config={"response_mime_type": "application/json"}
-                )
-                
-                # 如果成功拿到结果，解析并返回
-                text = response.text.strip()
-                if text.startswith("```json"): text = text[7:-3]
-                elif text.startswith("```"): text = text[3:-3]
-                
-                analysis_result = json.loads(text)
-                analysis_result['generated_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                print(f"✅ {model_name} 分析成功！")
-                return analysis_result
+        try:
+            # 2. 调用 API
+            response = self.model.generate_content(
+                prompt,
+                generation_config={"response_mime_type": "application/json"}
+            )
+            
+            text = response.text.strip()
+            if text.startswith("```json"): text = text[7:-3]
+            elif text.startswith("```"): text = text[3:-3]
+            
+            analysis_result = json.loads(text)
+            analysis_result['generated_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print("✅ AI 分析成功！")
+            return analysis_result
 
-            except Exception as e:
-                print(f"⚠️ {model_name} 调用失败: {e}")
-                continue # 尝试下一个模型
-
-        # 如果所有模型都失败
-        print("❌ 所有 AI 模型均不可用")
-        return {
-            "market_summary": "⚠️ AI 服务连接失败，请检查 API Key 或 网络",
-            "sector_analysis": [],
-            "top_picks": [],
-            "risk_alerts": ["无法连接 Google AI"],
-            "trading_strategy": "暂停操作",
-            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "fallback": True
-        }
+        except Exception as e:
+            print(f"❌ AI 分析失败: {e}")
+            traceback.print_exc()
+            # 返回兜底数据，防止程序崩溃
+            return {
+                "market_summary": f"⚠️ AI 服务暂时不可用: {str(e)[:100]}...",
+                "sector_analysis": [],
+                "top_picks": [],
+                "risk_alerts": ["API 调用异常"],
+                "trading_strategy": "暂停操作",
+                "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "fallback": True
+            }
