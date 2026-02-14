@@ -466,17 +466,17 @@
         }
       ]
     },
-    "collected_at": "2026-02-14 14:12:33"
+    "collected_at": "2026-02-14 14:19:57"
   },
   "analysis": {
-    "market_summary": "⚠️ AI 服务暂时不可用: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+    "market_summary": "⚠️ AI 服务连接失败，请检查 API Key 或 网络",
     "sector_analysis": [],
     "top_picks": [],
     "risk_alerts": [
-      "API 调用异常"
+      "无法连接 Google AI"
     ],
     "trading_strategy": "暂停操作",
-    "generated_at": "2026-02-14 14:12:33",
+    "generated_at": "2026-02-14 14:19:57",
     "fallback": true
   }
 }
