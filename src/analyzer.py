@@ -8,14 +8,11 @@ class PortfolioAnalyzer:
     def __init__(self, api_key):
         genai.configure(api_key=api_key)
         
-        # 🎯 根据你的日志，精准打击！
-        # 优先级列表：只选 Flash 系列，避开 Pro (Pro 额度太低会报 429)
-        # Gemini 2.0 Flash 是目前最强且免费额度最好的模型
+        # 🔥 修改：把 Lite 放到第一位，它的限流阈值最高，最不容易 429
         priority_models = [
-            'gemini-2.0-flash',          # 首选：性能强，额度高
-            'gemini-2.0-flash-lite-001', # 备选：极速，几乎不限流
-            'gemini-2.5-flash',          # 尝鲜：新版 Flash
-            'gemini-1.5-flash'           # 兜底
+            'gemini-2.0-flash-lite-preview-02-05', # 最新极速版
+            'gemini-2.0-flash-lite-001',           # 稳定极速版
+            'gemini-2.0-flash',                    # 标准版
         ]
         
         self.model = None
