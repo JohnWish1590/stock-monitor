@@ -2,14 +2,27 @@ name: Daily Stock Monitor
 
 on:
   schedule:
+    # ⚠️ GitHub 使用 UTC 时间，比北京时间慢 8 小时
+    # 1. 北京 07:00 (早报/美股收盘) -> UTC 23:00 (前一天)
     - cron: '0 23 * * *'
+    
+    # 2. 北京 12:00 (午评/A股休市) -> UTC 04:00
+    - cron: '0 4 * * *'
+    
+    # 3. 北京 20:00 (复盘/美股盘前) -> UTC 12:00
+    - cron: '0 12 * * *'
+
+  # 允许手动点击按钮触发 (保持不变)
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
-    # 添加权限
+    # 🔥 新增：超时保护
+    # 防止 API 卡住导致脚本一直跑，浪费额度。超过 10 分钟自动强制停止
+    timeout-minutes: 10
+    
     permissions:
       contents: write
       pages: write
@@ -23,6 +36,9 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
+        # 🔥 新增：缓存依赖
+        # 这样下一次运行就不用重新下载 pandas 等大文件，速度更快
+        cache: 'pip' 
         
     - name: Install dependencies
       run: |
