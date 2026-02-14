@@ -2,90 +2,91 @@ import google.generativeai as genai
 import json
 from datetime import datetime
 import traceback
+import re
 
 class PortfolioAnalyzer:
     def __init__(self, api_key):
         genai.configure(api_key=api_key)
-        # 🔥 修复：换用 Flash 模型，它是免费版最稳的选择，不会 404
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        # 🔥 核心修改：使用 'gemini-pro' (v1.0)
+        # 这是一个全球通用的模型，虽然没有 1.5 聪明，但绝对不会 404
+        self.model = genai.GenerativeModel('gemini-pro')
         
     def analyze(self, data):
-        print("🧠 [AI大脑] Gemini 1.5 Flash 正在进行深度归因...")
+        print("🧠 [AI大脑] Gemini Pro (v1.0) 正在启动兼容模式...")
         
-        # 1. 准备数据 string
-        us_text = "\n".join([f"- {s['name']}({s['code']}): {s['change_pct']:+.2f}%" for s in data['us_sectors']])
+        # 1. 准备数据
+        # v1.0 处理长文本能力稍弱，我们精简一下 Prompt
+        us_text = ", ".join([f"{s['name']}:{s.get('change_pct', 0)}%" for s in data.get('us_sectors', [])])
         
         all_stocks = data['portfolio']['hk_stocks'] + data['portfolio']['a_stocks']
-        # 过滤无效数据并排序
+        # 简单过滤
         valid_stocks = [s for s in all_stocks if s.get('price', 0) > 0]
-        top_movers = sorted(valid_stocks, key=lambda x: abs(x.get('change_pct', 0)), reverse=True)[:15]
+        # 取前 10 个波动大的
+        top_movers = sorted(valid_stocks, key=lambda x: abs(x.get('change_pct', 0)), reverse=True)[:10]
         
-        stock_text = "\n".join([f"- {s['name']}({s['code']}) [{s['sector']}]: {s.get('change_pct', 0):+.2f}%" for s in top_movers])
+        stock_text = "\n".join([f"- {s['name']}({s['code']}): {s.get('change_pct', 0)}%" for s in top_movers])
 
+        # v1.0 需要更明确的 JSON 指令
         prompt = f"""
-        你是我（用户）的【首席基金经理】。现在是北京时间 {datetime.now().strftime('%Y-%m-%d %H:%M')}。
-        请阅读以下【真实行情数据】，撰写《全球映射与持仓监控日报》。
+        角色：金融分析师
+        时间：{datetime.now().strftime('%Y-%m-%d')}
+        
+        【市场数据】
+        美股板块：{us_text}
+        持仓异动：{stock_text}
 
-        【美股/板块表现】
-        {us_text}
-
-        【我的持仓重点异动】
-        {stock_text}
-
-        【分析要求】：
-        1. **深度映射**：必须解释美股板块如何影响我的持仓（如：美股科技跌 -> 导致A股芯片跌）。
-        2. **汇率视角**：若涉及出口股，请考虑汇率影响。
-        3. **输出格式**：纯 JSON 格式。
-
-        【JSON 结构】：
+        【任务】
+        分析美股板块对持仓的影响。如有出口股考虑汇率。
+        
+        【输出要求】
+        必须只输出一段纯 JSON 代码，不要 markdown 标记，不要```符号。
+        格式如下：
         {{
-            "market_summary": "一句话市场定调",
+            "market_summary": "简短的市场定调",
             "sector_analysis": [
                 {{
                     "sector_name": "板块名",
-                    "impact_level": "高/中/低",
-                    "reasoning": "分析逻辑",
-                    "affected_stocks": ["股票A", "股票B"]
+                    "impact_level": "高",
+                    "reasoning": "原因",
+                    "affected_stocks": ["股票名"]
                 }}
             ],
             "top_picks": [
                 {{
                     "stock_name": "股票名",
                     "stock_code": "代码",
-                    "action": "买入/卖出/持有",
-                    "reason": "简短建议"
+                    "action": "持有",
+                    "reason": "建议"
                 }}
-            ],
-            "risk_alerts": ["风险1", "风险2"],
-            "trading_strategy": "操作建议"
+            ]
         }}
         """
 
         try:
             # 2. 调用 API
-            response = self.model.generate_content(
-                prompt,
-                generation_config={"response_mime_type": "application/json"}
-            )
-            
+            response = self.model.generate_content(prompt)
             text = response.text.strip()
-            if text.startswith("```json"): text = text[7:-3]
-            elif text.startswith("```"): text = text[3:-3]
+            
+            # 3. 清洗数据 (v1.0 比较啰嗦，可能会加 ```json)
+            # 使用正则提取 JSON 部分
+            match = re.search(r'\{.*\}', text, re.DOTALL)
+            if match:
+                text = match.group(0)
             
             analysis_result = json.loads(text)
             analysis_result['generated_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            print("✅ AI 分析成功！")
+            print("✅ AI 分析成功！(Gemini Pro)")
             return analysis_result
 
         except Exception as e:
             print(f"❌ AI 分析失败: {e}")
-            traceback.print_exc()
-            # 返回兜底数据，防止程序崩溃
+            # traceback.print_exc() 
+            # 返回兜底数据，保证网页能生成，不报错退出
             return {
-                "market_summary": f"⚠️ AI 服务暂时不可用: {str(e)[:100]}...",
+                "market_summary": f"AI 连接受限 (Gemini Pro): {str(e)[:50]}",
                 "sector_analysis": [],
                 "top_picks": [],
-                "risk_alerts": ["API 调用异常"],
+                "risk_alerts": ["请检查网络或Key配额"],
                 "trading_strategy": "暂停操作",
                 "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 "fallback": True
