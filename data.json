@@ -466,17 +466,14 @@
         }
       ]
     },
-    "collected_at": "2026-02-14 14:38:08"
+    "collected_at": "2026-02-14 14:42:59"
   },
   "analysis": {
-    "market_summary": "AI服务异常: 429 You exceeded your current quota, please check ...",
+    "market_summary": "AI 连接受限: 429 You exceeded your current quota, please check ...",
     "sector_analysis": [],
     "top_picks": [],
-    "risk_alerts": [
-      "请查看Actions日志中的模型列表"
-    ],
     "trading_strategy": "暂停操作",
-    "generated_at": "2026-02-14 14:38:08",
+    "generated_at": "2026-02-14 14:42:59",
     "fallback": true
   }
 }
